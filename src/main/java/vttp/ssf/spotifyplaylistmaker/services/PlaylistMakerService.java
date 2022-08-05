@@ -14,6 +14,7 @@ import static java.util.stream.Collectors.*;
 import org.apache.hc.core5.http.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import se.michaelthelin.spotify.SpotifyApi;
@@ -32,13 +33,10 @@ public class PlaylistMakerService {
     // * Class attributes
     // ******************************
 
-    private static final Logger logger = LoggerFactory.getLogger(PlaylistMakerService.class);
+    @Autowired
+    SpotifyApi spotifyApi;
 
-    // FIXME: request for new access token
-    private static final SpotifyApi spotifyApi = new SpotifyApi.Builder()
-            .setAccessToken(
-                    "BQBTB4n_P2gzRphFykRUYr0ELGGdoJZxSj-zMhktyhHmvlzAf-LGUdN7W6DmLFD4jfOS7RtgP9cQd6e4TQQ3eu_DDiZrCuyjZv6Ae-_tpRdkmrl44e6TV5UQXaO01K8rT661YDyWIGh-XqDbEqMtqUCngc0Y6koF8c_1Pfw")
-            .build();
+    private static final Logger logger = LoggerFactory.getLogger(PlaylistMakerService.class);
 
     // ******************************
     // * Private methods
@@ -52,6 +50,7 @@ public class PlaylistMakerService {
      */
     private List<String> searchPlaylistsByKeyword(String keyword, int nPlaylists) {
 
+        // TODO: move to repo
         final SearchPlaylistsRequest spRequest = spotifyApi.searchPlaylists(keyword).limit(nPlaylists).build();
 
         try {
@@ -73,18 +72,17 @@ public class PlaylistMakerService {
      */
     private PlaylistTrack[] getPlaylistTracks(String playlistId) {
 
+        // TODO: move to repo
         final GetPlaylistsItemsRequest gpiRequest = spotifyApi.getPlaylistsItems(playlistId).build();
 
         try {
             final Paging<PlaylistTrack> playlistTrackPaging = gpiRequest.execute();
             final PlaylistTrack[] pltArr = playlistTrackPaging.getItems();
-
             return pltArr;
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
             return new PlaylistTrack[0];
         }
-
     }
 
     /**
@@ -164,7 +162,6 @@ public class PlaylistMakerService {
                 .map(t -> allTracksMap.get(t))
                 .toList();
 
-        System.out.println(topTracksList);
         return topTracksList;
     }
 
