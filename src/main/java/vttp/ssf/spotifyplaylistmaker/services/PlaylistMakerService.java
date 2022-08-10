@@ -126,7 +126,7 @@ public class PlaylistMakerService {
     // * Public methods
     // ******************************
 
-    // SMELL: method contains a lot of type casting and manipulation
+    // SMELL: long method, a lot of type casting and manipulation
     public List<Track> getTopTracksOfKeyword(String keyword, int nPlaylists, int nTracks) {
 
         // get list of playlistIds related to keyword
