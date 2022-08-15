@@ -3,10 +3,10 @@
 ## Description
 Crawls through public Spotify playlists of a given keyword then generates a playlists with the most popular songs. 
 
-## Figma Prototypes:
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FhGbXCBtfNLp3AH6vlTGdC7%2Fvttp-spotify-playlsit-maker%3Fnode-id%3D4%253A264" allowfullscreen></iframe>
+<a href="https://www.figma.com/proto/hGbXCBtfNLp3AH6vlTGdC7/vttp-spotify-playlsit-maker?node-id=4%3A264&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=4%3A264">Figma wireframes</a>
+ ![Description](screenshots/wireframe.png?raw=true)
 
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FhGbXCBtfNLp3AH6vlTGdC7%2Fvttp-spotify-playlsit-maker%3Fnode-id%3D4%253A179%26scaling%3Dmin-zoom%26page-id%3D0%253A1%26starting-point-node-id%3D4%253A264%26show-proto-sidebar%3D1" allowfullscreen></iframe>
+<a href="https://www.figma.com/proto/hGbXCBtfNLp3AH6vlTGdC7/vttp-spotify-playlsit-maker?node-id=4%3A264&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=4%3A264">Figma prototype</a>
 
 ## Requirements
 For building and running the application you need:
