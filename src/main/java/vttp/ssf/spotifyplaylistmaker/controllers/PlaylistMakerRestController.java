@@ -24,8 +24,8 @@ public class PlaylistMakerRestController {
     private static final Logger logger = LoggerFactory.getLogger(PlaylistMakerRestController.class);
 
     @GetMapping("/search-playlists")
-    public ResponseEntity<List<Track>> searchPlaylists(@RequestParam(name = "keyword") String keyword,
-            @RequestParam("playlists") int nPlaylists, @RequestParam(name = "tracks") int nTracks) {
+    public ResponseEntity<List<Track>> searchPlaylists(@RequestParam(name="keyword") String keyword,
+            @RequestParam("playlists") int nPlaylists, @RequestParam(name="tracks") int nTracks) {
 
         logger.info("Generating playlist of {} tracks via mining {} playlists about: {}", nTracks, nPlaylists, keyword);
         List<Track> topTracksList = plmService.getTopTracksOfKeyword(keyword, nTracks, nPlaylists);
