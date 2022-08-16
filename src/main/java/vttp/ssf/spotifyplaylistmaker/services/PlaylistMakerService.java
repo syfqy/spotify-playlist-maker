@@ -2,6 +2,7 @@ package vttp.ssf.spotifyplaylistmaker.services;
 
 import static java.util.stream.Collectors.*;
 
+import com.neovisionaries.i18n.CountryCode;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -58,6 +59,7 @@ public class PlaylistMakerService {
     final SearchPlaylistsRequest spRequest = spotifyApi
       .searchPlaylists(keyword)
       .limit(nPlaylists)
+      .market(CountryCode.US) // TODO: Allow for user input?
       .build();
 
     try {
@@ -170,6 +172,7 @@ public class PlaylistMakerService {
       .toList();
 
     // get list of trackName-artist: Track maps
+    // Track name + artist used as unique id as some tracks have missing ids
     List<Map<String, Track>> trackNameMapList = playlistTrackArr
       .stream()
       .map(plt -> getTrackNamesAndArtist(plt))

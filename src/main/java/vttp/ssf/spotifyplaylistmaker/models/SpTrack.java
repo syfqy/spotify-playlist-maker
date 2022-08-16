@@ -29,12 +29,12 @@ public class SpTrack {
     this.artist = artist;
   }
 
-  public String getAlbum() {
+  public String getAlbumTitle() {
     return albumTitle;
   }
 
-  public void setAlbum(String album) {
-    this.albumTitle = album;
+  public void setAlbumTitle(String albumTitle) {
+    this.albumTitle = albumTitle;
   }
 
   public String getAlbumImgUrl() {
@@ -73,7 +73,7 @@ public class SpTrack {
     SpTrack spt = new SpTrack();
     spt.setTitle(track.getName());
     spt.setArtist(track.getArtists()[0].getName());
-    spt.setAlbum(track.getAlbum().getName());
+    spt.setAlbumTitle(track.getAlbum().getName());
     spt.setAlbumImgUrl(track.getAlbum().getImages()[0].getUrl());
     spt.setDuration(track.getDurationMs());
     spt.setDurationStr(

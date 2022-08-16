@@ -3,14 +3,14 @@ $(document).ready(() => {
     // wait for username input field to unfocus
     $("#search-playlists-btn").click((e) => {
 
+        // prevent page reload
         e.preventDefault();
 
         // show spinner
         $("#spinner").removeClass("visually-hidden");
 
-        // get keyword
+        // get search keyword
         const keyword = $("#search-playlists-input")[0].value;
-        console.log(keyword);
 
         // build url
         const searchPlaylistsBaseUrl = "/search-playlists?";
@@ -18,21 +18,16 @@ $(document).ready(() => {
             "keyword": keyword
         });
 
-        // request playlists
+        // request top N tracks
         fetch(searchPlaylistsBaseUrl + params)
             .then((response) => {
                 return response.text();
             }).then((html) => {
-                // TEMP: Simulate async 
-                setTimeout(
-                    () => {
-                        $("#spinner").addClass("visually-hidden");
-                        $("#playlist")[0].innerHTML = html;
-                    }, 3000
-                )
+                $("#spinner").addClass("visually-hidden");
+                $("#playlist")[0].innerHTML = html;
             }).catch((err) => {
                 console.warn("Something went wrong", err);
-            }), 3000
+            })
 
     });
 
