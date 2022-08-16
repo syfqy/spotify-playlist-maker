@@ -37,19 +37,22 @@
 
     <section class="main">
         <div class="d-flex flex-column align-items-center w-50 mx-auto mt-5">
-            <h2>Make New Playlist</h2>
+            <h2>Create New Playlist</h2>
             <form class="d-flex">
-                <input class="form-control me-2 w-auto" type="search" placeholder="Enter a keyword..."
-                    aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <input id="search-playlists-input" class="form-control me-2 w-auto" type="search"
+                    placeholder="Enter a keyword..." aria-label="Search">
+                <button id="search-playlists-btn" class="btn btn-outline-success" type="submit">Search</button>
             </form>
+        </div>
+
+        <div id="playlist" class="container">
+            <div id="spinner" class="spinner-border text-primary visually-hidden" role="status">
+            </div>
         </div>
     </section>
 
-
-
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
 
 </body>
 
