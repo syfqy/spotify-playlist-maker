@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import se.michaelthelin.spotify.model_objects.specification.Track;
+import vttp.ssf.spotifyplaylistmaker.models.SpTrack;
+import vttp.ssf.spotifyplaylistmaker.models.SpTrackList;
 import vttp.ssf.spotifyplaylistmaker.services.PlaylistMakerService;
 
 @RestController
@@ -24,7 +26,7 @@ public class PlaylistMakerRestController {
   );
 
   @GetMapping("/search-playlists")
-  public ResponseEntity<List<Track>> searchPlaylists(
+  public ResponseEntity<SpTrackList> searchPlaylists(
     @RequestParam(name = "keyword") String keyword,
     @RequestParam("playlists") int nPlaylists,
     @RequestParam(name = "tracks") int nTracks
@@ -35,7 +37,7 @@ public class PlaylistMakerRestController {
       nPlaylists,
       keyword
     );
-    List<Track> topTracksList = plmService.getTopTracksOfKeyword(
+    SpTrackList topTracksList = plmService.getTopTracksOfKeyword(
       keyword,
       nTracks,
       nPlaylists
