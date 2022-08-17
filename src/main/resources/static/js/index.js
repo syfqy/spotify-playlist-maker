@@ -1,34 +1,38 @@
-$(document).ready(() => {
+function showSpinner() {
+    $("#search-playlists-btn").replaceWith(`<div id="spinner" class="spinner-border text-primary" role="status"></div>`);
+}
 
-    // wait for username input field to unfocus
-    $("#search-playlists-btn").click((e) => {
+function showSearchBtn() {
+    $("#spinner").replaceWith(`<button id="search-playlists-btn" class="btn btn-outline-primary" onclick="searchPlaylists(event)"
+    type="submit">Search</button>`);
+}
 
-        // prevent page reload
-        e.preventDefault();
+function searchPlaylists(e) {
 
-        // show spinner
-        $("#spinner").removeClass("visually-hidden");
+    // prevent page refresh
+    e.preventDefault();
 
-        // get search keyword
-        const keyword = $("#search-playlists-input")[0].value;
+    // show spinner
+    showSpinner();
 
-        // build url
-        const searchPlaylistsBaseUrl = "/search-playlists?";
-        const params = new URLSearchParams({
-            "keyword": keyword
-        });
+    // get search keyword
+    const keyword = $("#search-playlists-input")[0].value;
 
-        // request top N tracks
-        fetch(searchPlaylistsBaseUrl + params)
-            .then((response) => {
-                return response.text();
-            }).then((html) => {
-                $("#spinner").addClass("visually-hidden");
-                $("#playlist")[0].innerHTML = html;
-            }).catch((err) => {
-                console.warn("Something went wrong", err);
-            })
-
+    // build url
+    const searchPlaylistsBaseUrl = "/search-playlists?";
+    const params = new URLSearchParams({
+        "keyword": keyword
     });
 
-});
+    // request top N tracks
+    fetch(searchPlaylistsBaseUrl + params)
+        .then((response) => {
+            return response.text();
+        }).then((html) => {
+            showSearchBtn();
+            $("#playlist")[0].innerHTML = html;
+        }).catch((err) => {
+            console.warn("Something went wrong", err);
+        })
+
+}

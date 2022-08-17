@@ -41,15 +41,15 @@
             <form class="d-flex">
                 <input id="search-playlists-input" class="form-control me-2 w-auto" type="search"
                     placeholder="Enter a keyword..." aria-label="Search">
-                <button id="search-playlists-btn" class="btn btn-outline-success" type="submit">Search</button>
+                <button id="search-playlists-btn" class="btn btn-outline-primary" onclick="searchPlaylists(event)"
+                    type="submit">Search</button>
             </form>
         </div>
 
-        <div class="d-flex flex-column align-items-center w-50 mx-auto mt-5">
-            <div id="spinner" class="spinner-border text-primary visually-hidden" role="status">
-            </div>
-            <div id="playlist" class="container">
-            </div>
+        <div class="d-flex flex-column align-items-center w-50 mx-auto gap-3 mt-5">
+        </div>
+        <div id="playlist" class="container">
+        </div>
         </div>
     </section>
 
