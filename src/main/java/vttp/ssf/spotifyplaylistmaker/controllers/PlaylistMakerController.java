@@ -30,8 +30,13 @@ public class PlaylistMakerController {
     @RequestParam String keyword,
     Model model
   ) {
+    int nTracks = 10;
+    int nPlaylists = 10;
+
     logger.info(
-      "Generating playlist of 20 tracks via mining 20 playlists about: {}",
+      "Generating playlist of {} tracks via mining {} playlists about: {}",
+      nTracks,
+      nPlaylists,
       keyword
     );
 
