@@ -36,3 +36,15 @@ function searchPlaylists(e) {
         })
 
 }
+
+/* 
+TODO: logic to save playlist
+async submit form to controller
+prevent default
+change save btn to saved
+add <a> tag to view playlists
+*/
+
+function savePlaylist() {
+
+}

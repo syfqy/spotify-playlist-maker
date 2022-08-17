@@ -13,6 +13,8 @@ public class SpTrack {
   String durationStr;
   String trackUrl;
 
+  //TODO: add rank and no of times appear in playlist
+
   public String getTitle() {
     return title;
   }

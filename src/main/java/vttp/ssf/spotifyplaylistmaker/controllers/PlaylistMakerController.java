@@ -33,6 +33,7 @@ public class PlaylistMakerController {
     @RequestParam String keyword,
     Model model
   ) {
+    // TODO: remove in production
     int nTracks = 10;
     int nPlaylists = 10;
 
@@ -44,9 +45,9 @@ public class PlaylistMakerController {
     );
 
     SpTrackList topTracksList = plmService.getTopTracksOfKeyword(
-      keyword,
       10,
-      10
+      10,
+      keyword
     );
 
     model.addAttribute("topTracksList", topTracksList);

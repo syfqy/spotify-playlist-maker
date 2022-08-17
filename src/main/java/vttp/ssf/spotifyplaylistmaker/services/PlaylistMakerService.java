@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.*;
 import com.neovisionaries.i18n.CountryCode;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -98,27 +99,23 @@ public class PlaylistMakerService {
     }
   }
 
-  /**
-   * Gets names and artist of tracks.
-   *
-   * @param plTrackArr
-   * @return
-   */
-  private Map<String, Track> getTrackNamesAndArtist(
+  private Map<String, Track> getTrackNamesAndArtist2(
     PlaylistTrack[] plTrackArr
   ) {
-    Map<String, Track> trackNameMap = Arrays
-      .stream(plTrackArr)
-      .collect(
-        Collectors.toMap(
-          plt ->
-            ((Track) plt.getTrack()).getName() +
-            "-" +
-            ((Track) plt.getTrack()).getArtists()[0].getName(),
-          plt -> (Track) plt.getTrack(),
-          (t1, t2) -> t1
-        )
-      ); // ignore duplicates
+    Map<String, Track> trackNameMap = new HashMap<String, Track>();
+
+    for (PlaylistTrack plt : plTrackArr) {
+      try {
+        String key =
+          ((Track) plt.getTrack()).getName() +
+          "-" +
+          ((Track) plt.getTrack()).getArtists()[0].getName();
+        Track value = (Track) plt.getTrack();
+        if (trackNameMap.get(key) == null) trackNameMap.put(key, value);
+      } catch (Exception e) {
+        logger.error(e.getMessage());
+      }
+    }
 
     return trackNameMap;
   }
@@ -158,9 +155,9 @@ public class PlaylistMakerService {
 
   // SMELL: long method, a lot of type casting and manipulation
   public SpTrackList getTopTracksOfKeyword(
-    String keyword,
+    int nTracks,
     int nPlaylists,
-    int nTracks
+    String keyword
   ) {
     // get list of playlistIds related to keyword
     List<String> playlistIdList = searchPlaylistsByKeyword(keyword, nPlaylists);
@@ -171,11 +168,13 @@ public class PlaylistMakerService {
       .map(plId -> getPlaylistTracks(plId))
       .toList();
 
+    logger.info("Request via Spotify API successful");
+
     // get list of trackName-artist: Track maps
     // Track name + artist used as unique id as some tracks have missing ids
     List<Map<String, Track>> trackNameMapList = playlistTrackArr
       .stream()
-      .map(plt -> getTrackNamesAndArtist(plt))
+      .map(plt -> getTrackNamesAndArtist2(plt))
       .toList();
 
     // merge list of maps to single map as lookup table

@@ -25,9 +25,13 @@ public class PlaylistMakerRestController {
   @GetMapping("/search-playlists")
   public ResponseEntity<SpTrackList> searchPlaylists(
     @RequestParam(name = "keyword") String keyword,
-    @RequestParam("playlists") int nPlaylists,
-    @RequestParam(name = "tracks") int nTracks
+    @RequestParam(name = "tracks") int nTracks,
+    @RequestParam("playlists") int nPlaylists
   ) {
+    // NOTE: can only request max of 50 playlist from Spotify API
+    // TODO: can support >50 via requesting in batches and using offset param;
+    nPlaylists = nPlaylists > 50 ? 50 : nPlaylists;
+
     logger.info(
       "Generating playlist of {} tracks via mining {} playlists about: {}",
       nTracks,
@@ -35,9 +39,9 @@ public class PlaylistMakerRestController {
       keyword
     );
     SpTrackList topTracksList = plmService.getTopTracksOfKeyword(
-      keyword,
       nTracks,
-      nPlaylists
+      nPlaylists,
+      keyword
     );
     return ResponseEntity.ok(topTracksList);
   }
