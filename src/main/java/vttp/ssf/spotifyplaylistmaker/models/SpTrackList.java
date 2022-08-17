@@ -10,6 +10,9 @@ public class SpTrackList {
   List<SpTrack> spTracks;
   int nTracks;
 
+  public SpTrackList() {}
+
+  //SMELL: methods in constructor, does not apply when default constructor used
   public SpTrackList(List<SpTrack> spTracks) {
     this.spTracks = spTracks;
     this.totalDuration =
@@ -41,5 +44,13 @@ public class SpTrackList {
 
   public void setSpTracks(List<SpTrack> spTracks) {
     this.spTracks = spTracks;
+  }
+
+  public int getnTracks() {
+    return nTracks;
+  }
+
+  public void setnTracks(int nTracks) {
+    this.nTracks = nTracks;
   }
 }

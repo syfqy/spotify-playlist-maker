@@ -1,21 +1,44 @@
-<div class="d-flex flex-column align-items-center" th:fragment="playlist-container">
-    <button id="save-playlist-btn" class="btn btn-primary visually-hidden">Save this playlist</button>
-    <th:block th:each="track : ${topTracksList.spTracks}">
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img th:src="${track.albumImgUrl}" class="img-fluid rounded-start album-img" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="track-title" th:text="${track.title}"></h5>
-                        <h5 class="track-artist" th:text="${track.artist}"></h5>
-                        <h5 class="track-album" th:text="${track.albumTitle}"></h5>
-                        <h5 class="track-duration" th:text="${track.durationStr}"></h5>
-                        <a class="track-url" th:href="${track.trackUrl}" th:text="|Play ${track.title} on Spotify|"></a>
+<div class="d-flex flex-column align-items-center gap-3" th:fragment="playlist-container">
+    <form action="#" method="post" th:action="@{/playlists}" th:object="${topTracksList}">
+
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter username...">
+        </div>
+        <div class="mb-3">
+            <label for="playlist-name" class="form-label">Playlist Name</label>
+            <input type="text" class="form-control" id="playlist-name" placeholder="Enter a name for this playlist...">
+        </div>
+        <div class="d-grid gap-2 my-3">
+            <button id="save-playlist-btn" class="btn btn-primary" type="submit">Save this playlist</button>
+        </div>
+
+        <div>
+            <th:block th:each="track, stat : *{spTracks}">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img th:src="${track.albumImgUrl}" class="img-fluid rounded-start album-img" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <input type="hidden" th:field="*{spTracks[__${stat.index}__].title}" />
+                                <input type="hidden" th:field="*{spTracks[__${stat.index}__].artist}" />
+                                <input type="hidden" th:field="*{spTracks[__${stat.index}__].albumTitle}" />
+                                <input type="hidden" th:field="*{spTracks[__${stat.index}__].albumImgUrl}" />
+                                <input type="hidden" th:field="*{spTracks[__${stat.index}__].durationStr}" />
+                                <input type="hidden" th:field="*{spTracks[__${stat.index}__].trackUrl}" />
+
+                                <h5 class="track-title" th:text="${track.title}"></h5>
+                                <h5 class="track-artist" th:text="${track.artist}"></h5>
+                                <h5 class="track-album" th:text="${track.albumTitle}"></h5>
+                                <h5 class="track-duration" th:text="${track.durationStr}"></h5>
+                                <a class="track-url" th:href="${track.trackUrl}"
+                                    th:text="|Play ${track.title} on Spotify|"></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </th:block>
         </div>
-    </th:block>
 </div>

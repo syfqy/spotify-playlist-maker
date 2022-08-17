@@ -41,6 +41,5 @@ public class PlaylistMakerRestController {
     );
     return ResponseEntity.ok(topTracksList);
   }
-  // TODO: save playlist to redis
-
+  // TODO: post method, save playlist to redis
 }

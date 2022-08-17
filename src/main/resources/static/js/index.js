@@ -19,7 +19,7 @@ function searchPlaylists(e) {
     const keyword = $("#search-playlists-input")[0].value;
 
     // build url
-    const searchPlaylistsBaseUrl = "/search-playlists?";
+    const searchPlaylistsBaseUrl = "/search?";
     const params = new URLSearchParams({
         "keyword": keyword
     });
@@ -30,7 +30,7 @@ function searchPlaylists(e) {
             return response.text();
         }).then((html) => {
             showSearchBtn();
-            $("#playlist")[0].innerHTML = html;
+            $("#main").append(html);
         }).catch((err) => {
             console.warn("Something went wrong", err);
         })

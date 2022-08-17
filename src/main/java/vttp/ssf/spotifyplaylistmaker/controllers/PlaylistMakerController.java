@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import vttp.ssf.spotifyplaylistmaker.models.SpTrack;
 import vttp.ssf.spotifyplaylistmaker.models.SpTrackList;
 import vttp.ssf.spotifyplaylistmaker.services.PlaylistMakerService;
 
@@ -25,7 +28,7 @@ public class PlaylistMakerController {
     return "index";
   }
 
-  @GetMapping("/search-playlists")
+  @GetMapping("/search")
   public String showGeneratedPlaylist(
     @RequestParam String keyword,
     Model model
@@ -49,5 +52,19 @@ public class PlaylistMakerController {
     model.addAttribute("topTracksList", topTracksList);
 
     return "frag/generatedPlaylist :: playlist-container";
+  }
+
+  // TODO: save to redis db
+  @PostMapping("/playlists")
+  public String savePlaylist(
+    @ModelAttribute("topTracksList") SpTrackList playlist,
+    Model model
+  ) {
+    // REMOVE
+    logger.info("Saving playlist containing: {}", playlist.getnTracks());
+    for (SpTrack track : playlist.getSpTracks()) {
+      logger.info(track.getTitle() + " by" + track.getArtist());
+    }
+    return "save";
   }
 }
