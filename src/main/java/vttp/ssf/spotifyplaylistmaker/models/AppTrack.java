@@ -3,7 +3,7 @@ package vttp.ssf.spotifyplaylistmaker.models;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import se.michaelthelin.spotify.model_objects.specification.Track;
 
-public class SpTrack {
+public class AppTrack {
 
   String title;
   String artist;
@@ -13,7 +13,7 @@ public class SpTrack {
   String durationStr;
   String trackUrl;
 
-  //TODO: add rank and no of times appear in playlist
+  //TODO: add rank and no of times appear in public playlists
 
   public String getTitle() {
     return title;
@@ -71,17 +71,17 @@ public class SpTrack {
     this.trackUrl = trackUrl;
   }
 
-  public static SpTrack createFromTrack(Track track) {
-    SpTrack spt = new SpTrack();
-    spt.setTitle(track.getName());
-    spt.setArtist(track.getArtists()[0].getName());
-    spt.setAlbumTitle(track.getAlbum().getName());
-    spt.setAlbumImgUrl(track.getAlbum().getImages()[0].getUrl());
-    spt.setDuration(track.getDurationMs());
-    spt.setDurationStr(
+  public static AppTrack createFromTrack(Track track) {
+    AppTrack t = new AppTrack();
+    t.setTitle(track.getName());
+    t.setArtist(track.getArtists()[0].getName());
+    t.setAlbumTitle(track.getAlbum().getName());
+    t.setAlbumImgUrl(track.getAlbum().getImages()[0].getUrl());
+    t.setDuration(track.getDurationMs());
+    t.setDurationStr(
       DurationFormatUtils.formatDuration(track.getDurationMs(), "mm:ss")
     );
-    spt.setTrackUrl(track.getExternalUrls().get("spotify"));
-    return spt;
+    t.setTrackUrl(track.getExternalUrls().get("spotify"));
+    return t;
   }
 }

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import vttp.ssf.spotifyplaylistmaker.models.SpTrack;
-import vttp.ssf.spotifyplaylistmaker.models.SpTrackList;
+import vttp.ssf.spotifyplaylistmaker.models.AppPlaylist;
+import vttp.ssf.spotifyplaylistmaker.models.AppTrack;
 import vttp.ssf.spotifyplaylistmaker.services.PlaylistMakerService;
 
 @Controller
@@ -45,7 +45,7 @@ public class PlaylistMakerController {
       keyword
     );
 
-    SpTrackList topTracksList = plmService.getTopTracksOfKeyword(
+    AppPlaylist topTracksList = plmService.getTopTracksOfKeyword(
       10,
       10,
       keyword
@@ -59,12 +59,12 @@ public class PlaylistMakerController {
   // TODO: save to redis db
   @PostMapping("/playlists")
   public String savePlaylist(
-    @ModelAttribute("topTracksList") SpTrackList playlist,
+    @ModelAttribute("topTracksList") AppPlaylist playlist,
     Model model
   ) {
     // TODO: remove in production
     logger.info("Saving playlist containing: {}", playlist.getnTracks());
-    for (SpTrack track : playlist.getSpTracks()) {
+    for (AppTrack track : playlist.getAppTracks()) {
       logger.info(track.getTitle() + " by" + track.getArtist());
       break;
     }

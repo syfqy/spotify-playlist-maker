@@ -25,8 +25,8 @@ import se.michaelthelin.spotify.model_objects.specification.PlaylistTrack;
 import se.michaelthelin.spotify.model_objects.specification.Track;
 import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest;
 import se.michaelthelin.spotify.requests.data.search.simplified.SearchPlaylistsRequest;
-import vttp.ssf.spotifyplaylistmaker.models.SpTrack;
-import vttp.ssf.spotifyplaylistmaker.models.SpTrackList;
+import vttp.ssf.spotifyplaylistmaker.models.AppPlaylist;
+import vttp.ssf.spotifyplaylistmaker.models.AppTrack;
 
 @Service
 public class PlaylistMakerService {
@@ -154,7 +154,7 @@ public class PlaylistMakerService {
   // ******************************
 
   // SMELL: long method, a lot of type casting and manipulation
-  public SpTrackList getTopTracksOfKeyword(
+  public AppPlaylist getTopTracksOfKeyword(
     int nTracks,
     int nPlaylists,
     String keyword
@@ -171,7 +171,7 @@ public class PlaylistMakerService {
     logger.info("Request via Spotify API successful");
 
     // get list of trackName-artist: Track maps
-    // Track name + artist used as unique id as some tracks have missing ids
+    // NOTE: Track name + artist used as unique id as some tracks have missing ids
     List<Map<String, Track>> trackNameMapList = playlistTrackArr
       .stream()
       .map(plt -> getTrackNamesAndArtist2(plt))
@@ -196,13 +196,13 @@ public class PlaylistMakerService {
     Map<String, Long> topTracksMap = getTopNTracks(trackFreqMap, nTracks);
 
     // get list of Track objects for top N tracks
-    List<SpTrack> spTracks = Arrays
+    List<AppTrack> appTracks = Arrays
       .stream(topTracksMap.keySet().toArray())
       .map(t -> allTracksMap.get(t))
-      .map(t -> SpTrack.createFromTrack(t))
+      .map(t -> AppTrack.createFromTrack(t))
       .toList();
 
-    SpTrackList topTracksList = new SpTrackList(spTracks);
+    AppPlaylist topTracksList = new AppPlaylist(appTracks);
 
     return topTracksList;
   }
