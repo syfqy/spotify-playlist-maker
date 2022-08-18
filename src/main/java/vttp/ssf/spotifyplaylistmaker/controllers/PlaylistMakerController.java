@@ -1,5 +1,7 @@
 package vttp.ssf.spotifyplaylistmaker.controllers;
 
+import java.util.LinkedList;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,11 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import vttp.ssf.spotifyplaylistmaker.models.AppPlaylist;
 import vttp.ssf.spotifyplaylistmaker.models.AppTrack;
+import vttp.ssf.spotifyplaylistmaker.models.AppUser;
 import vttp.ssf.spotifyplaylistmaker.services.PlaylistMakerService;
 
 @Controller
@@ -34,7 +36,7 @@ public class PlaylistMakerController {
     @RequestParam String keyword,
     Model model
   ) {
-    // TODO: remove in production
+    // TEST: get nTracks and nPlaylists via user input
     int nTracks = 10;
     int nPlaylists = 5;
 
@@ -62,7 +64,7 @@ public class PlaylistMakerController {
     @ModelAttribute("topTracksList") AppPlaylist playlist,
     Model model
   ) {
-    // TODO: remove in production
+    // TEST
     logger.info("Saving playlist containing: {}", playlist.getnTracks());
     for (AppTrack track : playlist.getAppTracks()) {
       logger.info(track.getTitle() + " by" + track.getArtist());
@@ -73,8 +75,37 @@ public class PlaylistMakerController {
     return "frag/savedPlaylist";
   }
 
-  @GetMapping("/{username}/playlists")
-  public String showUserPlaylists(@PathVariable String username) {
-    return null;
+  @GetMapping("/playlists")
+  public String showUserPlaylists(Model model) {
+    // TEST
+    AppUser user1 = generateTestUser();
+    model.addAttribute("user", user1);
+
+    return "testPlaylists";
+  }
+
+  private AppUser generateTestUser() {
+    // TEST
+    AppUser user1 = new AppUser();
+    user1.setUsername("user1");
+
+    AppPlaylist pl1 = new AppPlaylist();
+    pl1.setName("playlist 1");
+    pl1.setDateCreated("12-01-2022");
+    pl1.setTotalDurationStr("01:32:15");
+    pl1.setnTracks(20);
+
+    AppPlaylist pl2 = new AppPlaylist();
+    pl2.setName("playlist 2");
+    pl2.setDateCreated("21-11-2020");
+    pl2.setTotalDurationStr("02:01:53");
+    pl2.setnTracks(15);
+
+    List<AppPlaylist> l = new LinkedList<>();
+    l.add(pl1);
+    l.add(pl2);
+
+    user1.setPlaylists(l);
+    return user1;
   }
 }

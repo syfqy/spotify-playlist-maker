@@ -5,12 +5,12 @@ import org.apache.commons.lang3.time.DurationFormatUtils;
 
 public class AppPlaylist {
 
-  int totalDuration;
-  String totalDurationStr;
-  List<AppTrack> appTracks;
-  int nTracks;
-
-  // TODO: add playlistName attr
+  public String name;
+  public int nTracks;
+  public String dateCreated;
+  public int totalDuration;
+  public String totalDurationStr;
+  public List<AppTrack> appTracks;
 
   public AppPlaylist() {}
 
@@ -24,20 +24,36 @@ public class AppPlaylist {
     this.nTracks = appTracks.size();
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public int getnTracks() {
+    return nTracks;
+  }
+
+  public void setnTracks(int nTracks) {
+    this.nTracks = nTracks;
+  }
+
+  public String getDateCreated() {
+    return dateCreated;
+  }
+
+  public void setDateCreated(String dateCreated) {
+    this.dateCreated = dateCreated;
+  }
+
   public int getTotalDuration() {
     return totalDuration;
   }
 
   public void setTotalDuration(int totalDuration) {
     this.totalDuration = totalDuration;
-  }
-
-  public List<AppTrack> getAppTracks() {
-    return appTracks;
-  }
-
-  public void setAppTracks(List<AppTrack> appTracks) {
-    this.appTracks = appTracks;
   }
 
   public String getTotalDurationStr() {
@@ -48,11 +64,11 @@ public class AppPlaylist {
     this.totalDurationStr = totalDurationStr;
   }
 
-  public int getnTracks() {
-    return nTracks;
+  public List<AppTrack> getAppTracks() {
+    return appTracks;
   }
 
-  public void setnTracks(int nTracks) {
-    this.nTracks = nTracks;
+  public void setAppTracks(List<AppTrack> appTracks) {
+    this.appTracks = appTracks;
   }
 }
