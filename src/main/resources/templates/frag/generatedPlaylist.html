@@ -16,7 +16,7 @@
         </div>
 
         <div>
-            <th:block th:each="track, stat : *{spTracks}">
+            <th:block th:each="track, stat : *{appTracks}">
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
                         <div class="col-md-4">
@@ -24,12 +24,12 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <input type="hidden" th:field="*{spTracks[__${stat.index}__].title}" />
-                                <input type="hidden" th:field="*{spTracks[__${stat.index}__].artist}" />
-                                <input type="hidden" th:field="*{spTracks[__${stat.index}__].albumTitle}" />
-                                <input type="hidden" th:field="*{spTracks[__${stat.index}__].albumImgUrl}" />
-                                <input type="hidden" th:field="*{spTracks[__${stat.index}__].durationStr}" />
-                                <input type="hidden" th:field="*{spTracks[__${stat.index}__].trackUrl}" />
+                                <input type="hidden" th:field="*{appTracks[__${stat.index}__].title}" />
+                                <input type="hidden" th:field="*{appTracks[__${stat.index}__].artist}" />
+                                <input type="hidden" th:field="*{appTracks[__${stat.index}__].albumTitle}" />
+                                <input type="hidden" th:field="*{appTracks[__${stat.index}__].albumImgUrl}" />
+                                <input type="hidden" th:field="*{appTracks[__${stat.index}__].durationStr}" />
+                                <input type="hidden" th:field="*{appTracks[__${stat.index}__].trackUrl}" />
 
                                 <h5 class="track-title" th:text="${track.title}"></h5>
                                 <h5 class="track-artist" th:text="${track.artist}"></h5>

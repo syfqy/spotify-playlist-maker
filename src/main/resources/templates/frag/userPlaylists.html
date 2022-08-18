@@ -1,0 +1,16 @@
+<div class="d-flex flex-column align-items-center gap-3" th:fragment=user-playlists">
+    <th:block th:each="playlist, stat : ${user.playlists}">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="playlist-name" th:text="{playlist.name}"></h5>
+                        <h5 class="playlist-duration" th:text="{playlist.durationStr}"></h5>
+                        <h5 class="playlist-date-created" th:text="{playlist.dateCreated}"></h5>
+                        <h5 class="playlist-n-tracks" th:text="{playlist.nTracks}"></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</div>

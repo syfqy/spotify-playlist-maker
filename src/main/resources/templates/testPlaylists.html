@@ -9,7 +9,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
-    <title>Spotify Playlist Maker</title>
+    <title>Spotify Playlist Maker - Manage Playlists</title>
 </head>
 
 <body>
@@ -23,8 +23,8 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 text-white">Create New Playlist</a></li>
-            <li><a href="#" class="nav-link px-2 text-secondary">Manage Playlists</a></li>
+            <li><a href="#" class="nav-link px-2 text-secondary">Create New Playlist</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Manage Playlists</a></li>
         </ul>
 
         <div class="user-info d-flex gap-3 justify-content-between align-items-center">
@@ -37,13 +37,24 @@
 
     <section id="main">
         <div class="d-flex flex-column align-items-center w-50 mx-auto my-5">
-            <h2>Create New Playlist</h2>
-            <form class="d-flex">
-                <input id="search-playlists-input" class="form-control me-2 w-auto" type="search"
-                    placeholder="Enter a keyword..." aria-label="Search">
-                <button id="search-playlists-btn" class="btn btn-outline-primary" onclick="searchPlaylists(event)"
-                    type="submit">Search</button>
-            </form>
+            <h2>My Playlists</h2>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter username..." required>
+            </div>
+        </div>
+
+        <div class="d-flex flex-column align-items-center gap-3" th:fragment="user-playlists">
+            <th:block th:each="playlist, stat : ${user.playlists}">
+                <div class="card w-75">
+                    <div class="card-body">
+                        <h5 class="playlist-name" th:text="${playlist.name}"></h5>
+                        <h5 class="playlist-duration" th:text="${playlist.totalDurationStr}"></h5>
+                        <h5 class="playlist-date-created" th:text="${playlist.dateCreated}"></h5>
+                        <h5 class="playlist-n-tracks" th:text="${playlist.nTracks}"></h5>
+                    </div>
+                </div>
+            </th:block>
         </div>
 
     </section>
