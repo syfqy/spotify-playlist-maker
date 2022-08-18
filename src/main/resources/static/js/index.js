@@ -9,9 +9,6 @@ function showSearchBtn() {
 
 function searchPlaylists(e) {
 
-    // prevent page refresh
-    e.preventDefault();
-
     // show spinner
     showSpinner();
 
@@ -35,6 +32,9 @@ function searchPlaylists(e) {
             console.warn("Something went wrong", err);
         })
 
+    // prevent page refresh
+    e.preventDefault();
+
 }
 
 /* 
@@ -45,6 +45,22 @@ change save btn to saved
 add <a> tag to view playlists
 */
 
-function savePlaylist() {
+function savePlaylist(e) {
 
+    const form = e.target;
+
+    // submit form
+    fetch("/playlists", {
+        method: form.method,
+        body: new FormData(form)
+    })
+        .then((response) => {
+            return response.text();
+        }).then((html) => {
+            $("#save-playlist-container").replaceWith(html);
+        }).catch((err) => {
+            console.warn("Something went wrong", err);
+        })
+
+    e.preventDefault();
 }

@@ -10,6 +10,8 @@ public class SpTrackList {
   List<SpTrack> spTracks;
   int nTracks;
 
+  // TODO: add playlistName attr
+
   public SpTrackList() {}
 
   //SMELL: methods in constructor, does not apply when default constructor used

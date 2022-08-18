@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import vttp.ssf.spotifyplaylistmaker.models.SpTrack;
@@ -35,7 +36,7 @@ public class PlaylistMakerController {
   ) {
     // TODO: remove in production
     int nTracks = 10;
-    int nPlaylists = 10;
+    int nPlaylists = 5;
 
     logger.info(
       "Generating playlist of {} tracks via mining {} playlists about: {}",
@@ -61,11 +62,19 @@ public class PlaylistMakerController {
     @ModelAttribute("topTracksList") SpTrackList playlist,
     Model model
   ) {
-    // REMOVE
+    // TODO: remove in production
     logger.info("Saving playlist containing: {}", playlist.getnTracks());
     for (SpTrack track : playlist.getSpTracks()) {
       logger.info(track.getTitle() + " by" + track.getArtist());
+      break;
     }
-    return "save";
+
+    // call plmService
+    return "frag/savedPlaylist";
+  }
+
+  @GetMapping("/{username}/playlists")
+  public String showUserPlaylists(@PathVariable String username) {
+    return null;
   }
 }
