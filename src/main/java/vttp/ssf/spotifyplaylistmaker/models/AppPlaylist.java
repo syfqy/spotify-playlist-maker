@@ -1,9 +1,10 @@
 package vttp.ssf.spotifyplaylistmaker.models;
 
+import java.io.Serializable;
 import java.util.List;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
-public class AppPlaylist {
+public class AppPlaylist implements Serializable {
 
   public String name;
   public int nTracks;

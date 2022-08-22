@@ -1,9 +1,10 @@
 package vttp.ssf.spotifyplaylistmaker.models;
 
+import java.io.Serializable;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import se.michaelthelin.spotify.model_objects.specification.Track;
 
-public class AppTrack {
+public class AppTrack implements Serializable {
 
   String title;
   String artist;

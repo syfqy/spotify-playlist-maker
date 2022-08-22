@@ -1,11 +1,18 @@
 package vttp.ssf.spotifyplaylistmaker.models;
 
+import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
-public class AppUser {
+public class AppUser implements Serializable {
 
   public String username;
   public List<AppPlaylist> playlists;
+
+  public AppUser(String username) {
+    this.username = username;
+    this.playlists = new LinkedList<>();
+  }
 
   public String getUsername() {
     return username;
