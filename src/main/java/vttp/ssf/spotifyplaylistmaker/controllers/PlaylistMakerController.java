@@ -81,7 +81,7 @@ public class PlaylistMakerController {
     AppUser user1 = generateTestUser();
     model.addAttribute("user", user1);
 
-    return "testPlaylists";
+    return "managePlaylists";
   }
 
   private AppUser generateTestUser() {
