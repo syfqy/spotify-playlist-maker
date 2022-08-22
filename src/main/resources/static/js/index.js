@@ -48,9 +48,11 @@ add <a> tag to view playlists
 function savePlaylist(e) {
 
     const form = e.target;
+    const username = $("#username-input")[0].value
+    const url = "/playlists/" + username;
 
     // submit form
-    fetch("/playlists", {
+    fetch(url, {
         method: form.method,
         body: new FormData(form)
     })

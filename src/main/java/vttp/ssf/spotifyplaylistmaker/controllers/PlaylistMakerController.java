@@ -1,5 +1,6 @@
 package vttp.ssf.spotifyplaylistmaker.controllers;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -9,10 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import vttp.ssf.spotifyplaylistmaker.models.AppPlaylist;
-import vttp.ssf.spotifyplaylistmaker.models.AppTrack;
 import vttp.ssf.spotifyplaylistmaker.models.AppUser;
 import vttp.ssf.spotifyplaylistmaker.services.PlaylistMakerService;
 
@@ -48,44 +49,52 @@ public class PlaylistMakerController {
     );
 
     AppPlaylist topTracksList = plmService.getTopTracksOfKeyword(
-      10,
-      10,
+      nTracks,
+      nPlaylists,
       keyword
     );
 
     model.addAttribute("topTracksList", topTracksList);
 
-    return "frag/generatedPlaylist :: playlist-container";
+    return "frag/generatedPlaylist";
   }
 
   // TODO: save to redis db
-  @PostMapping("/playlists")
+  @PostMapping("/playlists/{username}")
   public String savePlaylist(
     @ModelAttribute("topTracksList") AppPlaylist playlist,
     Model model
   ) {
-    // TEST
-    logger.info("Saving playlist containing: {}", playlist.getnTracks());
-    for (AppTrack track : playlist.getAppTracks()) {
-      logger.info(track.getTitle() + " by" + track.getArtist());
-      break;
-    }
+    playlist.setDateCreated(LocalDate.now().toString());
+    playlist.setnTracks(playlist.getAppTracks().size());
+
+    logger.info(
+      "Saving playlist {} containing: {}",
+      playlist.getName(),
+      playlist.getnTracks()
+    );
 
     // call plmService
     return "frag/savedPlaylist";
   }
 
+  // TODO: move to separate controller
   @GetMapping("/playlists")
-  public String showUserPlaylists(Model model) {
-    // TEST
-    AppUser user1 = generateTestUser();
-    model.addAttribute("user", user1);
-
+  public String showGuestPlaylists(Model model) {
     return "managePlaylists";
   }
 
-  private AppUser generateTestUser() {
+  @GetMapping("/playlists/{username}")
+  public String showUserPlaylists(@PathVariable String username, Model model) {
+    // fetch from redis
     // TEST
+    AppUser user1 = generateTestUser();
+    model.addAttribute("user", user1);
+    return "frag/userPlaylists";
+  }
+
+  // TEST
+  private AppUser generateTestUser() {
     AppUser user1 = new AppUser();
     user1.setUsername("user1");
 

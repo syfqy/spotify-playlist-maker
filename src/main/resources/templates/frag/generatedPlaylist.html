@@ -3,12 +3,12 @@
 
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Enter username..." required>
+            <input type="text" class="form-control" id="username-input" placeholder="Enter username..." required>
         </div>
         <div class="mb-3">
             <label for="playlist-name" class="form-label">Playlist Name</label>
-            <input type="text" class="form-control" id="playlist-name" placeholder="Enter a name for this playlist..."
-                required>
+            <input type="text" class="form-control" id="playlist-name" th:field="*{name}"
+                placeholder="Enter a name for this playlist..." required>
         </div>
         <div id="save-playlist-container" class="d-grid gap-2 my-3">
             <button id="save-playlist-btn" class="btn btn-primary" type="submit">Save this
