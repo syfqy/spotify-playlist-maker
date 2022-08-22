@@ -1,7 +1,10 @@
 # Spotify Playlist Maker
 
 ## Description
-Crawls through public Spotify playlists of a given keyword then generates a playlists with the most popular songs. 
+Crawls through public Spotify playlists of a given keyword (e.g. dance), then generates a playlist with 
+the most popular songs. 
+
+ ![Description](screenshots/overview.png?raw=true)
 
 <a href="https://www.figma.com/proto/hGbXCBtfNLp3AH6vlTGdC7/vttp-spotify-playlsit-maker?node-id=4%3A264&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=4%3A264">Figma wireframes</a>
  ![Description](screenshots/wireframe.png?raw=true)
