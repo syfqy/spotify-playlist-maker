@@ -11,7 +11,7 @@ import vttp.ssf.spotifyplaylistmaker.models.AppUser;
 public class UserRepository {
 
   @Autowired
-  RedisTemplate<String, Object> redisTemplate;
+  RedisTemplate<String, AppUser> redisTemplate;
 
   private static final Logger logger = LoggerFactory.getLogger(
     UserRepository.class

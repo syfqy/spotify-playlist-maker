@@ -34,6 +34,7 @@ public class PlaylistMakerController {
     return "index";
   }
 
+  // TODO: handle when search term is invalid and returns no results
   @GetMapping("/search")
   public String showGeneratedPlaylist(
     @RequestParam String keyword,

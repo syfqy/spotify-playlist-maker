@@ -9,6 +9,8 @@ public class AppUser implements Serializable {
   public String username;
   public List<AppPlaylist> playlists;
 
+  public AppUser() {}
+
   public AppUser(String username) {
     this.username = username;
     this.playlists = new LinkedList<>();

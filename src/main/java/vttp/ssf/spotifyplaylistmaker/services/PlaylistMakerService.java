@@ -160,6 +160,7 @@ public class PlaylistMakerService {
     String keyword
   ) {
     // get list of playlistIds related to keyword
+    // FIXME: handle when search term is invalid and returns no results
     List<String> playlistIdList = searchPlaylistsByKeyword(keyword, nPlaylists);
 
     // get list of playlist tracks from playlist ids
