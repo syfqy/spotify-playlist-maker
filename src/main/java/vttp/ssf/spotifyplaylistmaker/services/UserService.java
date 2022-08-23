@@ -23,7 +23,11 @@ public class UserService {
     return user;
   }
 
-  public void savePlaylist(String username, AppPlaylist playlist) {
+  public void updateUserPlaylists(AppUser user) {
+    userRepo.saveUser(user);
+  }
+
+  public void addPlaylist(String username, AppPlaylist playlist) {
     // get user
     AppUser user = userRepo.getUserByUsername(username);
 

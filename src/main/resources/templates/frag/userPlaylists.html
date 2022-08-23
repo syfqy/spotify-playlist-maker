@@ -3,13 +3,17 @@
         <div class="d-flex align-items-center gap-3">
             <div class="card w-75">
                 <div class="card-body">
-                    <h5 class="playlist-name" th:text="${playlist.name}"></h5>
+                    <input type="text" id="playlist-name-input" th:field="${user.playlists[__${stat.index}__].name}"
+                        disabled />
+                    <!-- <h5 class="playlist-name" th:text="${playlist.name}"></h5> -->
                     <h5 class="playlist-duration" th:text="${playlist.totalDurationStr}"></h5>
                     <h5 class="playlist-date-created" th:text="${playlist.dateCreated}"></h5>
                     <h5 class="playlist-n-tracks" th:text="${playlist.nTracks}"></h5>
                 </div>
             </div>
-            <button type="button" class="btn rename-btn btn-outline-primary py-3"><i class="bi bi-pencil"></i></button>
+
+            <button type="button" id="rename-save-btn" class="btn rename-btn btn-outline-primary py-3"
+                onclick="renameSaveHandler()"><i class="bi bi-pencil"></i></button>
             <button type="button" class="btn remove-btn btn-danger py-3"><i class="bi bi-trash"></i></button>
         </div>
     </th:block>

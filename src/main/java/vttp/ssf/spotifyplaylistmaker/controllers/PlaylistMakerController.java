@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -78,7 +79,7 @@ public class PlaylistMakerController {
     );
 
     // add playlist to user's playlists
-    userService.savePlaylist(username, playlist);
+    userService.addPlaylist(username, playlist);
 
     return "frag/savedPlaylist";
   }
@@ -96,5 +97,10 @@ public class PlaylistMakerController {
     AppUser user = userService.getUser(username);
     model.addAttribute("user", user);
     return "frag/userPlaylists";
+  }
+
+  @PatchMapping("/playlists/{username}")
+  public void updateUserPlaylists(AppUser user) {
+    userService.updateUserPlaylists(user);
   }
 }
