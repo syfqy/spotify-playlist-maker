@@ -4,11 +4,12 @@ import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -99,8 +100,25 @@ public class PlaylistMakerController {
     return "frag/userPlaylists";
   }
 
-  @PatchMapping("/playlists/{username}")
-  public void updateUserPlaylists(AppUser user) {
-    userService.updateUserPlaylists(user);
+  @PostMapping(
+    path = "/playlists/{username}/{playlistId}",
+    consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+  )
+  public String renameUserPlaylist(
+    @PathVariable String username,
+    @PathVariable String playlistId,
+    @RequestParam MultiValueMap<String, String> formData
+  ) {
+    String newPlaylistName = formData.get("playlist-name").get(0);
+
+    userService.renamePlaylist(username, newPlaylistName, playlistId);
+
+    logger.info(
+      "{}'s playlist id: {} renamed to {}",
+      username,
+      playlistId,
+      newPlaylistName
+    );
+    return "managePlaylists";
   }
 }

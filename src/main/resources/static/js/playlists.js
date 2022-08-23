@@ -1,4 +1,8 @@
+// replace identifiers with callers
+
 function showUserPlaylists() {
+
+    // BUG: double loading of playlists when focusout triggered multiple times, consider replacing with button instead
 
     const username = $("#username-input")[0].value
 
@@ -15,48 +19,59 @@ function showUserPlaylists() {
 }
 
 function enableRename() {
-    $("#playlist-name-input")[0].disabled = false;
+    $("#playlist-name-input").prop("readonly", "");
     $("#playlist-name-input")[0].select();
 
 }
 
 function disableRename() {
-    $("#playlist-name-input")[0].disabled = true;
+    $("#playlist-name-input").prop("readonly", "readonly");
 }
 
-function toggleRenameSaveIcon() {
-
+function showSaveBtn() {
     const btn = $("#rename-save-btn");
-
-    btn.toggleClass("rename-btn");
-    btn.toggleClass("save-btn");
-    btn.toggleClass("btn-outline-primary");
-    btn.toggleClass("btn-primary");
-
-    const renameIcon = `<i class="bi bi-pencil"></i>`;
-    const saveIcon = `<i class="bi bi-save"></i>`;
-
-    const displayIcon = btn.hasClass("rename-btn") ? renameIcon : saveIcon;
-    btn.html(displayIcon);
+    const saveBtn = `<button type="submit" id="rename-save-btn" class="btn save-btn btn-primary py-3"
+    onclick="savePlaylist()"><i class="bi bi-save"></i></button>`
+    btn.replaceWith(saveBtn);
 }
 
-function renameSaveHandler() {
-    // change style
-    toggleRenameSaveIcon();
-
+function showRenameBtn() {
     const btn = $("#rename-save-btn");
-    const isRenameActive = btn.hasClass("rename-btn");
-
-    // enable/disable playlist name input
-    const inputHandler = isRenameActive ? disableRename : enableRename;
-    inputHandler();
-
-    if (!isRenameActive) {
-        // save
-    }
+    const renameBtn = `<button type="button" id="rename-save-btn" class="btn rename-btn btn-outline-primary py-3"
+    onclick="renamePlaylist()"><i class="bi bi-pencil"></i></button>`
+    btn.replaceWith(renameBtn);
 }
 
-function savePlaylistName() {
+function renamePlaylist() {
+    enableRename();
+    showSaveBtn();
+}
+
+function savePlaylist() {
+    disableRename();
+    showRenameBtn();
+    updatePlaylist()
+}
+
+function updatePlaylist() {
+
+    const form = $("#playlist-form")[0];
+    const username = $("#username-input")[0].value
+    const playlistId = $("#playlist-id")[0].value
+    const url = "/playlists/" + username + "/" + playlistId;
+
+    // submit form
+    fetch(url, {
+        method: form.method,
+        body: new FormData(form)
+    })
+        .then((response) => {
+            return response.text();
+            // }).then((html) => {
+            //     $("#save-playlist-container").replaceWith(html);
+        }).catch((err) => {
+            console.warn("Something went wrong", err);
+        })
 
 }
 

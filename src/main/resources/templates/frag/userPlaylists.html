@@ -1,20 +1,23 @@
 <div class="d-flex flex-column align-items-center gap-3" th:fragment="user-playlists-container">
     <th:block th:each="playlist, stat : ${user.playlists}">
-        <div class="d-flex align-items-center gap-3">
-            <div class="card w-75">
-                <div class="card-body">
-                    <input type="text" id="playlist-name-input" th:field="${user.playlists[__${stat.index}__].name}"
-                        disabled />
-                    <!-- <h5 class="playlist-name" th:text="${playlist.name}"></h5> -->
-                    <h5 class="playlist-duration" th:text="${playlist.totalDurationStr}"></h5>
-                    <h5 class="playlist-date-created" th:text="${playlist.dateCreated}"></h5>
-                    <h5 class="playlist-n-tracks" th:text="${playlist.nTracks}"></h5>
+        <form id="playlist-form" action="#" method="post">
+            <div class="d-flex align-items-center gap-3">
+                <div class="card w-75">
+                    <div class="card-body">
+                        <input id="playlist-id" type="hidden" name="playlist-id" th:name="playlist-id"
+                            th:value="${user.playlists[__${stat.index}__].id}" />
+                        <input type="text" id="playlist-name-input" name="playlist-name" th:name="playlist-name"
+                            th:value="${user.playlists[__${stat.index}__].name}" readonly />
+                        <h5 class="playlist-duration" th:text="${playlist.totalDurationStr}"></h5>
+                        <h5 class="playlist-date-created" th:text="${playlist.dateCreated}"></h5>
+                        <h5 class="playlist-n-tracks" th:text="${playlist.nTracks}"></h5>
+                    </div>
                 </div>
-            </div>
 
-            <button type="button" id="rename-save-btn" class="btn rename-btn btn-outline-primary py-3"
-                onclick="renameSaveHandler()"><i class="bi bi-pencil"></i></button>
-            <button type="button" class="btn remove-btn btn-danger py-3"><i class="bi bi-trash"></i></button>
-        </div>
-    </th:block>
+                <button type="button" id="rename-save-btn" class="btn rename-btn btn-outline-primary py-3"
+                    onclick="renamePlaylist()"><i class="bi bi-pencil"></i></button>
+                <button type="button" class="btn remove-btn btn-danger py-3"><i class="bi bi-trash"></i></button>
+        </form>
+</div>
+</th:block>
 </div>
