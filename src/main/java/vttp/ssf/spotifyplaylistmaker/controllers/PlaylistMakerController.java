@@ -107,7 +107,8 @@ public class PlaylistMakerController {
   public String renameUserPlaylist(
     @PathVariable String username,
     @PathVariable String playlistId,
-    @RequestParam MultiValueMap<String, String> formData
+    @RequestParam MultiValueMap<String, String> formData,
+    Model model
   ) {
     String newPlaylistName = formData.get("playlist-name").get(0);
 
@@ -119,9 +120,21 @@ public class PlaylistMakerController {
       playlistId,
       newPlaylistName
     );
-    return "managePlaylists";
+
+    AppUser user = userService.getUser(username);
+    AppPlaylist playlist = userService.getUserPlaylist(username, playlistId);
+
+    model.addAttribute("user", user);
+    model.addAttribute("playlist", playlist);
+
+    return "frag/userPlaylists :: playlist-link";
   }
-  //TODO: Delete playlists
+
+  //TODO: Delete a playlist
 
   // TODO: Get a playlist
+  @GetMapping("/playlists/{username}/{playlistId}")
+  public String showPlaylist() {
+    return "playlist";
+  }
 }

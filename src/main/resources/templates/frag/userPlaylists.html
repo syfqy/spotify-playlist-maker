@@ -3,11 +3,14 @@
         <div class="d-flex align-items-center gap-3">
             <div class="card w-75">
                 <div class="card-body">
+                    <a th:fragment="playlist-link" class="playlist-link"
+                        th:href="@{/playlists/{user}/{playlist}/(user=${user.username},playlist=${playlist.id})}"
+                        th:text="${playlist.name}"></a>
                     <form class="playlist-form" action="#" method="post">
+                        <input type="text" class="playlist-name-input" name="playlist-name" th:name="playlist-name"
+                            th:value="${user.playlists[__${stat.index}__].name}" hidden />
                         <input class="playlist-id" type="hidden" name="playlist-id" th:name="playlist-id"
                             th:value="${user.playlists[__${stat.index}__].id}" />
-                        <input type="text" class="playlist-name-input" name="playlist-name" th:name="playlist-name"
-                            th:value="${user.playlists[__${stat.index}__].name}" readonly />
                     </form>
                     <h5 class="playlist-duration" th:text="${playlist.totalDurationStr}"></h5>
                     <h5 class="playlist-date-created" th:text="${playlist.dateCreated}"></h5>

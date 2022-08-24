@@ -1,5 +1,3 @@
-// replace identifiers with callers
-
 function showUserPlaylists() {
 
     const username = $("#username-input")[0].value
@@ -15,13 +13,15 @@ function showUserPlaylists() {
         })
 }
 
-function enableRename(nameInput) {
-    nameInput.prop("readonly", "");
+function enableRename(nameLink, nameInput) {
+    nameLink.prop("hidden", "hidden")
+    nameInput.prop("hidden", "");
     nameInput.select();
 }
 
-function disableRename(nameInput) {
-    nameInput.prop("readonly", "readonly");
+function disableRename(nameLink, nameInput) {
+    nameLink.prop("hidden", "")
+    nameInput.prop("hidden", "hidden");
 }
 
 function showSaveBtn(btn) {
@@ -39,22 +39,24 @@ function showRenameBtn(btn) {
 // SMELL: rename and save fns contain duplicated code
 function renamePlaylist(e) {
     const btn = $(e.currentTarget);
+    const nameLink = btn.siblings(".card").find(".playlist-link");
     const nameInput = btn.siblings(".card").find(".playlist-name-input");
-    enableRename(nameInput);
+    enableRename(nameLink, nameInput);
     showSaveBtn(btn);
 }
 
 function savePlaylist(e) {
     const btn = $(e.currentTarget);
+    const nameLink = btn.siblings(".card").find(".playlist-link");
     const nameInput = btn.siblings(".card").find(".playlist-name-input");
     const form = nameInput.parent("form");
 
-    disableRename(nameInput);
+    disableRename(nameLink, nameInput);
     showRenameBtn(btn);
-    updatePlaylist(form);
+    updatePlaylist(nameLink, form);
 }
 
-function updatePlaylist(form) {
+function updatePlaylist(nameLink, form) {
 
     const username = $("#username-input")[0].value;
     const playlistId = form.children(".playlist-id").val();
@@ -69,8 +71,9 @@ function updatePlaylist(form) {
     })
         .then((response) => {
             return response.text();
-            // }).then((html) => {
-            //     $("#save-playlist-container").replaceWith(html);
+        }).then((html) => {
+            console.log(html);
+            nameLink.replaceWith(html);
         }).catch((err) => {
             console.warn("Something went wrong", err);
         })

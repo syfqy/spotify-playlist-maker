@@ -28,6 +28,7 @@ public class UserService {
     String newPlaylistName,
     String playlistId
   ) {
+    // TODO: perform operation on playlist directly instead of on entire user
     AppUser user = userRepo.getUserByUsername(username);
     AppPlaylist playlist = user
       .getPlaylists()
@@ -62,5 +63,17 @@ public class UserService {
       playlist.getName(),
       username
     );
+  }
+
+  // SMELL: duplicate code
+  public AppPlaylist getUserPlaylist(String username, String playlistId) {
+    AppUser user = userRepo.getUserByUsername(username);
+    AppPlaylist playlist = user
+      .getPlaylists()
+      .stream()
+      .filter(pl -> pl.getId().equals(playlistId))
+      .findFirst()
+      .orElse(null);
+    return playlist;
   }
 }
