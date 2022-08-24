@@ -121,4 +121,7 @@ public class PlaylistMakerController {
     );
     return "managePlaylists";
   }
+  //TODO: Delete playlists
+
+  // TODO: Get a playlist
 }
