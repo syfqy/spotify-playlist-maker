@@ -2,8 +2,6 @@
 
 function showUserPlaylists() {
 
-    // BUG: double loading of playlists when focusout triggered multiple times, consider replacing with button instead
-
     const username = $("#username-input")[0].value
 
     // async GET request to fetch user's cart
@@ -11,11 +9,10 @@ function showUserPlaylists() {
         .then((response) => {
             return response.text();
         }).then((html) => {
-            $("#main").append(html);
+            $("#user-playlists").replaceWith(html);
         }).catch((err) => {
             console.warn("Something went wrong", err);
         })
-
 }
 
 function enableRename(nameInput) {
@@ -39,6 +36,7 @@ function showRenameBtn(btn) {
     btn.replaceWith(renameBtn);
 }
 
+// SMELL: rename and save fns contain duplicated code
 function renamePlaylist(e) {
     const btn = $(e.currentTarget);
     const nameInput = btn.siblings(".card").find(".playlist-name-input");

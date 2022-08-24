@@ -1,4 +1,4 @@
-<div class="d-flex flex-column align-items-center gap-3" th:fragment="user-playlists-container">
+<div id="user-playlists" class="d-flex flex-column align-items-center gap-3" th:fragment="user-playlists-container">
     <th:block th:each="playlist, stat : ${user.playlists}">
         <div class="d-flex align-items-center gap-3">
             <div class="card w-75">

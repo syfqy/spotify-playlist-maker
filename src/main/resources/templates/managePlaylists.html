@@ -39,12 +39,13 @@
     <section id="main">
         <div class="d-flex flex-column align-items-center w75 mx-auto my-5">
             <h2>My Playlists</h2>
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username-input" placeholder="Enter username..."
-                    onfocusout="showUserPlaylists()" required>
+            <div class="mb-3 d-flex align-items-center gap-3">
+                <input type="text" class="form-control" id="username-input" placeholder="Enter username..." required>
+                <button type="button" class="get-playlists-btn btn btn-primary text-nowrap"
+                    onclick="showUserPlaylists()">View playlists</button>
             </div>
         </div>
+        <div id="user-playlists"></div>
 
     </section>
 
