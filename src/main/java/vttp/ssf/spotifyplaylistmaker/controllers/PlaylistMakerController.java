@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -131,6 +132,20 @@ public class PlaylistMakerController {
   }
 
   //TODO: Delete a playlist
+  @DeleteMapping("/playlists/{username}/{playlistId}")
+  public String deletePlaylist(
+    @PathVariable String username,
+    @PathVariable String playlistId,
+    Model model
+  ) {
+    userService.deletePlaylist(username, playlistId);
+    logger.info("{}'s playlist id: {} has been deleted", username, playlistId);
+
+    AppUser user = userService.getUser(username);
+    model.addAttribute("user", user);
+
+    return "frag/userPlaylists";
+  }
 
   // TODO: Get a playlist
   @GetMapping("/playlists/{username}/{playlistId}")

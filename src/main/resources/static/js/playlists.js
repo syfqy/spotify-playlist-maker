@@ -80,3 +80,25 @@ function updatePlaylist(nameLink, form) {
 
 }
 
+function deletePlaylist(e) {
+
+    const btn = $(e.currentTarget);
+    const form = btn.siblings(".card").find("form");
+    const username = $("#username-input")[0].value;
+    const playlistId = form.children(".playlist-id").val();
+    const url = "/playlists/" + username + "/" + playlistId;
+
+    // submit form
+    fetch(url, {
+        method: "delete",
+    })
+        .then((response) => {
+            return response.text();
+        }).then((html) => {
+            $("#user-playlists").replaceWith(html);
+        }).catch((err) => {
+            console.warn("Something went wrong", err);
+        })
+
+}
+

@@ -76,4 +76,10 @@ public class UserService {
       .orElse(null);
     return playlist;
   }
+
+  public void deletePlaylist(String username, String playlistId) {
+    AppUser user = userRepo.getUserByUsername(username);
+    user.getPlaylists().removeIf(pl -> pl.getId().equals(playlistId));
+    userRepo.saveUser(user);
+  }
 }
