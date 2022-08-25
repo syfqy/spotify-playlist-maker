@@ -169,8 +169,6 @@ public class PlaylistMakerService {
       .map(plId -> getPlaylistTracks(plId))
       .toList();
 
-    logger.info("Request via Spotify API successful");
-
     // get list of trackName-artist: Track maps
     // NOTE: Track name + artist used as unique id as some tracks have missing ids
     List<Map<String, Track>> trackNameMapList = playlistTrackArr
