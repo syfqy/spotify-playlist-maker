@@ -131,7 +131,6 @@ public class PlaylistMakerController {
     return "frag/userPlaylists :: playlist-link";
   }
 
-  //TODO: Delete a playlist
   @DeleteMapping("/playlists/{username}/{playlistId}")
   public String deletePlaylist(
     @PathVariable String username,
@@ -147,9 +146,14 @@ public class PlaylistMakerController {
     return "frag/userPlaylists";
   }
 
-  // TODO: Get a playlist
   @GetMapping("/playlists/{username}/{playlistId}")
-  public String showPlaylist() {
+  public String showExistingPlaylist(
+    @PathVariable String username,
+    @PathVariable String playlistId,
+    Model model
+  ) {
+    AppPlaylist playlist = userService.getUserPlaylist(username, playlistId);
+    model.addAttribute("playlist", playlist);
     return "playlist";
   }
 }
