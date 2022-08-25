@@ -19,30 +19,29 @@ function searchPlaylists(e) {
         "keyword": keyword
     });
 
+    console.log("fetching")
     // request top N tracks
     fetch(searchPlaylistsBaseUrl + params)
         .then((response) => {
             return response.text();
         }).then((html) => {
+            showSearchBtn();
             $("#playlist-container").replaceWith(html);
         }).catch((err) => {
             console.warn("Something went wrong", err);
         })
-
-    // prevent page refresh
     e.preventDefault();
 
 }
 
 function searchHandler(e) {
     showSpinner();
-    searchPlaylists(e)
-    showSearchBtn();
+    searchPlaylists(e);
 }
 
 function savePlaylist(e) {
 
-    const form = e.target;
+    const form = e.currentTarget;
     const username = $("#username-input")[0].value
     const url = "/playlists/" + username;
 
