@@ -7,10 +7,8 @@ function showSearchBtn() {
     type="submit">Search</button>`);
 }
 
+// TODO: move fetching into utils 
 function searchPlaylists(e) {
-
-    // show spinner
-    showSpinner();
 
     // get search keyword
     const keyword = $("#search-playlists-input")[0].value;
@@ -26,8 +24,7 @@ function searchPlaylists(e) {
         .then((response) => {
             return response.text();
         }).then((html) => {
-            showSearchBtn();
-            $("#main").append(html);
+            $("#playlist-container").replaceWith(html);
         }).catch((err) => {
             console.warn("Something went wrong", err);
         })
@@ -37,13 +34,11 @@ function searchPlaylists(e) {
 
 }
 
-/* 
-TODO: logic to save playlist
-async submit form to controller
-prevent default
-change save btn to saved
-add <a> tag to view playlists
-*/
+function searchHandler(e) {
+    showSpinner();
+    searchPlaylists(e)
+    showSearchBtn();
+}
 
 function savePlaylist(e) {
 
