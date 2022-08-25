@@ -1,3 +1,25 @@
+# [0.4.0](https://github.com/syfqy/spotify-playlist-maker/compare/v0.3.0...v0.4.0) (2022-08-25)
+
+
+### Bug Fixes
+
+* resolve bug where save and edit button only works for first playlist ([4779880](https://github.com/syfqy/spotify-playlist-maker/commit/47798802b867992b952258119e2185ace3df9ae7))
+* resolve generated playlist getting appended when search multiple times ([1f620d0](https://github.com/syfqy/spotify-playlist-maker/commit/1f620d0de551bf4b5ef9f430199368e7ad7875c2))
+* resolve user playlists getting appended multiple times ([c11a219](https://github.com/syfqy/spotify-playlist-maker/commit/c11a2192dfb213fc9ddb672a2b4d2acc074d9230))
+
+
+### Features
+
+* add labels to track cards ([bb7883c](https://github.com/syfqy/spotify-playlist-maker/commit/bb7883c4893aa5e7a3e97023c581222ff799046b))
+* add links to playlists ([1bba2a3](https://github.com/syfqy/spotify-playlist-maker/commit/1bba2a3d3cdc67e41c767db701ce82e0b28c356c))
+* add serialization/deserialization to redis config ([f47b3ab](https://github.com/syfqy/spotify-playlist-maker/commit/f47b3ab5af8e099f28da6e47bb1e3f6b199d1161))
+* add ui behaviour on rename and save playlists ([6fb4275](https://github.com/syfqy/spotify-playlist-maker/commit/6fb42750e453d2691ab987b2c639ba37aadc3aa2))
+* add view to user's existing playlist ([014073b](https://github.com/syfqy/spotify-playlist-maker/commit/014073bc04e663ea5e6bfe0422768b421233648c))
+* allow for renaminof playlists ([2daf204](https://github.com/syfqy/spotify-playlist-maker/commit/2daf204dcd41304bb81fa326cc02a0d8e90e41f4))
+* enable deleting of playlists ([5d24874](https://github.com/syfqy/spotify-playlist-maker/commit/5d248747211ed0f4151a513c13d890197e0f3d9f))
+
+
+
 # [0.3.0](https://github.com/syfqy/spotify-playlist-maker/compare/v0.2.0...v0.3.0) (2022-08-22)
 
 
