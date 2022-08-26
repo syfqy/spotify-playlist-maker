@@ -7,13 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Scheduled;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.credentials.ClientCredentials;
 import se.michaelthelin.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
-
-// WARNING: access token only granted on start app, expires after 1hr
-// TODO: set up loop to request for refresh token after each expiry
 
 @Configuration
 public class SpotifyApiConfig {
@@ -28,7 +26,9 @@ public class SpotifyApiConfig {
     SpotifyApiConfig.class
   );
 
+  // NOTE: set to request for new token after prev token expires every 60 min
   @Bean
+  @Scheduled(fixedDelay = 3600000)
   public SpotifyApi initSpotifyApi() {
     SpotifyApi spotifyApi = new SpotifyApi.Builder()
       .setClientId(clientId)
