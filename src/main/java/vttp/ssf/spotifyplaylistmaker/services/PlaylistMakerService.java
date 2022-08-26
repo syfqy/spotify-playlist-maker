@@ -60,7 +60,7 @@ public class PlaylistMakerService {
     final SearchPlaylistsRequest spRequest = spotifyApi
       .searchPlaylists(keyword)
       .limit(nPlaylists)
-      .market(CountryCode.US) // TODO: Allow for user input?
+      .market(CountryCode.US) // TODO: allow for user input?
       .build();
 
     try {

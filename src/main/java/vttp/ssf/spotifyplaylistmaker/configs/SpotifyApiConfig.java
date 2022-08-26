@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
@@ -14,6 +15,7 @@ import se.michaelthelin.spotify.model_objects.credentials.ClientCredentials;
 import se.michaelthelin.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
 
 @Configuration
+@EnableScheduling
 public class SpotifyApiConfig {
 
   @Value("${spotify.client-id}")
@@ -26,23 +28,33 @@ public class SpotifyApiConfig {
     SpotifyApiConfig.class
   );
 
-  // NOTE: set to request for new token after prev token expires every 60 min
-  @Bean
-  @Scheduled(fixedDelay = 3600000)
-  public SpotifyApi initSpotifyApi() {
-    SpotifyApi spotifyApi = new SpotifyApi.Builder()
-      .setClientId(clientId)
-      .setClientSecret(clientSecret)
-      .build();
+  // NOTE: schedule request new access token every 55 min (expires every 60 min)
+  private static final long accessTokenExpiryMs = 3300000;
 
-    ClientCredentialsRequest clientCredentialsRequest = spotifyApi
-      .clientCredentials()
-      .build();
+  public static SpotifyApi spotifyApi;
+  private static ClientCredentialsRequest clientCredentialsRequest;
+  private static ClientCredentials clientCredentials;
+
+  @Scheduled(fixedDelay = accessTokenExpiryMs)
+  private void getNewAccessToken()
+    throws ParseException, SpotifyWebApiException, IOException {
+    clientCredentials = clientCredentialsRequest.execute();
+    spotifyApi.setAccessToken(clientCredentials.getAccessToken());
+    logger.info("Request for new Spotify API access token successful");
+  }
+
+  @Bean
+  public SpotifyApi initSpotifyApi() {
+    spotifyApi =
+      new SpotifyApi.Builder()
+        .setClientId(clientId)
+        .setClientSecret(clientSecret)
+        .build();
+
+    clientCredentialsRequest = spotifyApi.clientCredentials().build();
 
     try {
-      final ClientCredentials clientCredentials = clientCredentialsRequest.execute();
-      spotifyApi.setAccessToken(clientCredentials.getAccessToken());
-      logger.info("Request for Spotify access token successful");
+      getNewAccessToken();
     } catch (IOException | SpotifyWebApiException | ParseException e) {
       logger.error(e.getMessage());
     }
