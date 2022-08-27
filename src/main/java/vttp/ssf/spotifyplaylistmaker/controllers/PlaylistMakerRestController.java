@@ -2,6 +2,7 @@ package vttp.ssf.spotifyplaylistmaker.controllers;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,6 @@ public class PlaylistMakerRestController {
     return ResponseEntity.ok(topTracksList);
   }
 
-  // TODO: post method, save playlist to redis
   @PostMapping("/playlists/{username}")
   public ResponseEntity<AppPlaylist> saveGeneratedPlaylist(
     @PathVariable String username,
@@ -90,13 +90,13 @@ public class PlaylistMakerRestController {
     return ResponseEntity.ok(userPlaylists);
   }
 
-  // FIXME: Request interpreted as json string (e.g. "{'newPlaylistName': 'pl2'}")
   @PostMapping(path = "/playlists/{username}/{playlistId}")
   public ResponseEntity<AppPlaylist> renameUserPlaylist(
     @PathVariable String username,
     @PathVariable String playlistId,
-    @RequestBody String newPlaylistName
+    @RequestBody Map<String, String> newPlaylistMap
   ) {
+    String newPlaylistName = newPlaylistMap.get("newPlaylistName");
     userService.renamePlaylist(username, newPlaylistName, playlistId);
 
     logger.info(

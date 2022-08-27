@@ -28,7 +28,7 @@ public class SpotifyApiConfig {
     SpotifyApiConfig.class
   );
 
-  // NOTE: schedule request new access token every 55 min (expires every 60 min)
+  // NOTE: schedule request new access token (expires every 60 min) every 55 min
   private static final long accessTokenExpiryMs = 3300000;
 
   public static SpotifyApi spotifyApi;

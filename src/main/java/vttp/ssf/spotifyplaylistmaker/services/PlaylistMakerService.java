@@ -56,11 +56,10 @@ public class PlaylistMakerService {
     String keyword,
     int nPlaylists
   ) {
-    // TODO: move to repo
     final SearchPlaylistsRequest spRequest = spotifyApi
       .searchPlaylists(keyword)
       .limit(nPlaylists)
-      .market(CountryCode.US) // TODO: allow for user input?
+      .market(CountryCode.US)
       .build();
 
     try {
