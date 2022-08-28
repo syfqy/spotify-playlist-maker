@@ -4,16 +4,53 @@
             <div class="d-flex align-items-center gap-3">
                 <div class="card w-75">
                     <div class="card-body">
-                        <a th:fragment="playlist-link" class="playlist-link"
-                            th:href="@{/playlists/{user}/{playlist}/(user=${user.username},playlist=${playlist.id})}"
-                            th:text="${playlist.name}"></a>
                         <input type="text" class="playlist-name-input" name="playlist-name" th:name="playlist-name"
                             th:value="${user.playlists[__${stat.index}__].name}" hidden />
                         <input class="playlist-id" type="hidden" name="playlist-id" th:name="playlist-id"
                             th:value="${user.playlists[__${stat.index}__].id}" />
-                        <h5 class="playlist-duration" th:text="${playlist.totalDurationStr}"></h5>
-                        <h5 class="playlist-date-created" th:text="${playlist.dateCreated}"></h5>
-                        <h5 class="playlist-n-tracks" th:text="${playlist.nTracks}"></h5>
+
+                        <div class="row">
+                            <h5>
+                                <a th:fragment="playlist-link" class="playlist-link"
+                                    th:href="@{/playlists/{user}/{playlist}/(user=${user.username},playlist=${playlist.id})}"
+                                    th:text="${playlist.name}"></a>
+                            </h5>
+                        </div>
+
+                        <div class="row g-0">
+                            <div class="col-8">
+                                <strong>
+                                    <p>Playlist Created:</p>
+                                </strong>
+                            </div>
+                            <div class="col-4">
+                                <p class="playlist-date-created" th:text="${playlist.dateCreated}"></p>
+                            </div>
+                        </div>
+
+                        <div class="row g-0">
+                            <div class="col-8">
+                                <strong>
+                                    <p>Playlist Duration:</p>
+                                </strong>
+                            </div>
+                            <div class="col-4">
+                                <p class="playlist-duration" th:text="${playlist.totalDurationStr}"></p>
+                            </div>
+                        </div>
+
+
+                        <div class="row g-0">
+                            <div class="col-8">
+                                <strong>
+                                    <p>No. of Tracks:</p>
+                                </strong>
+                            </div>
+                            <div class="col-4">
+                                <p class="playlist-n-tracks" th:text="${playlist.nTracks}"></p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 

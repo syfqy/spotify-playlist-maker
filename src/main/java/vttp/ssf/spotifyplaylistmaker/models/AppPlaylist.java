@@ -1,6 +1,7 @@
 package vttp.ssf.spotifyplaylistmaker.models;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 import org.apache.commons.lang3.time.DurationFormatUtils;
@@ -9,11 +10,11 @@ public class AppPlaylist implements Serializable {
 
   public String id;
   public String name;
+  public List<AppTrack> appTracks;
   public int nTracks;
   public String dateCreated;
   public int totalDuration;
   public String totalDurationStr;
-  public List<AppTrack> appTracks;
 
   public AppPlaylist() {
     this.id = generateId();
@@ -23,10 +24,11 @@ public class AppPlaylist implements Serializable {
   public AppPlaylist(List<AppTrack> appTracks) {
     this.id = generateId();
     this.appTracks = appTracks;
+    this.nTracks = appTracks.size();
+    this.dateCreated = LocalDate.now().toString();
     this.totalDuration = calcTotalDuration(appTracks);
     this.totalDurationStr =
       DurationFormatUtils.formatDuration(this.totalDuration, "HH:mm:ss", true);
-    this.nTracks = appTracks.size();
   }
 
   private int calcTotalDuration(List<AppTrack> appTracks) {

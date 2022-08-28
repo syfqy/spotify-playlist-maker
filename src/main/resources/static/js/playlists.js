@@ -1,17 +1,17 @@
-// FIXME: validate username input must be filled in
 function showUserPlaylists(e) {
-
+    const form = $(e.currentTarget).parents("form")[0];
     const username = $("#username-input")[0].value
-
-    fetch("/playlists/" + username)
-        .then((response) => {
-            return response.text();
-        }).then((html) => {
-            $("#user-playlists").replaceWith(html);
-        }).catch((err) => {
-            console.warn("Something went wrong", err);
-        })
-    e.preventDefault();
+    if (form.checkValidity()) {
+        fetch("/playlists/" + username)
+            .then((response) => {
+                return response.text();
+            }).then((html) => {
+                $("#user-playlists").replaceWith(html);
+            }).catch((err) => {
+                console.warn("Something went wrong", err);
+            })
+        e.preventDefault();
+    }
 }
 
 function enableRename(nameLink, nameInput) {
@@ -57,6 +57,7 @@ function savePlaylist(e) {
     updatePlaylist(nameLink, form, e);
 }
 
+// SMELL: update and delete fns contain duplicated code
 function updatePlaylist(nameLink, form, e) {
 
     const username = $("#username-input")[0].value;
@@ -84,9 +85,9 @@ function updatePlaylist(nameLink, form, e) {
 function deletePlaylist(e) {
 
     const btn = $(e.currentTarget);
-    const form = btn.siblings(".card").find("form");
+    const form = btn.parents("form");
     const username = $("#username-input")[0].value;
-    const playlistId = form.children(".playlist-id").val();
+    const playlistId = form.find(".playlist-id").val();
     const url = "/playlists/" + username + "/" + playlistId;
 
     fetch(url, {
@@ -101,4 +102,3 @@ function deletePlaylist(e) {
         })
 
 }
-
