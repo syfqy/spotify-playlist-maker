@@ -19,7 +19,6 @@ function searchPlaylists(e) {
         "keyword": keyword
     });
 
-    console.log("fetching")
     // request top N tracks
     fetch(searchPlaylistsBaseUrl + params)
         .then((response) => {

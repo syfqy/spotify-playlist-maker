@@ -23,11 +23,18 @@ public class AppPlaylist implements Serializable {
   public AppPlaylist(List<AppTrack> appTracks) {
     this.id = generateId();
     this.appTracks = appTracks;
-    this.totalDuration =
-      appTracks.stream().map(t -> t.getDuration()).reduce(0, Integer::sum);
+    this.totalDuration = calcTotalDuration(appTracks);
     this.totalDurationStr =
       DurationFormatUtils.formatDuration(this.totalDuration, "HH:mm:ss", true);
     this.nTracks = appTracks.size();
+  }
+
+  private int calcTotalDuration(List<AppTrack> appTracks) {
+    int totalDuration = appTracks
+      .stream()
+      .map(t -> t.getDuration())
+      .reduce(0, Integer::sum);
+    return totalDuration;
   }
 
   private synchronized String generateId() {

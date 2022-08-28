@@ -71,17 +71,18 @@ public class PlaylistMakerController {
     @ModelAttribute("topTracksList") AppPlaylist playlist,
     Model model
   ) {
-    playlist.setDateCreated(LocalDate.now().toString());
-    playlist.setnTracks(playlist.getAppTracks().size());
+    AppPlaylist newPlaylist = new AppPlaylist(playlist.getAppTracks());
+    newPlaylist.setName(playlist.getName());
 
     logger.info(
-      "Saving playlist {} containing: {}",
-      playlist.getName(),
-      playlist.getnTracks()
+      "Saving playlist id: {}, name: {} to {}'s playlist collection",
+      newPlaylist.getId(),
+      newPlaylist.getName(),
+      username
     );
 
     // add playlist to user's playlists
-    userService.addPlaylist(username, playlist);
+    userService.addPlaylist(username, newPlaylist);
 
     return "frag/savedPlaylist";
   }

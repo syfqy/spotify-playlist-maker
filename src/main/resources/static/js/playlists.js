@@ -1,8 +1,8 @@
-function showUserPlaylists() {
+// FIXME: validate username input must be filled in
+function showUserPlaylists(e) {
 
     const username = $("#username-input")[0].value
 
-    // async GET request to fetch user's cart
     fetch("/playlists/" + username)
         .then((response) => {
             return response.text();
@@ -11,6 +11,7 @@ function showUserPlaylists() {
         }).catch((err) => {
             console.warn("Something went wrong", err);
         })
+    e.preventDefault();
 }
 
 function enableRename(nameLink, nameInput) {
@@ -49,22 +50,21 @@ function savePlaylist(e) {
     const btn = $(e.currentTarget);
     const nameLink = btn.siblings(".card").find(".playlist-link");
     const nameInput = btn.siblings(".card").find(".playlist-name-input");
-    const form = nameInput.parent("form");
+    const form = btn.parents("form");
 
     disableRename(nameLink, nameInput);
     showRenameBtn(btn);
-    updatePlaylist(nameLink, form);
+    updatePlaylist(nameLink, form, e);
 }
 
-function updatePlaylist(nameLink, form) {
+function updatePlaylist(nameLink, form, e) {
 
     const username = $("#username-input")[0].value;
-    const playlistId = form.children(".playlist-id").val();
+    const playlistId = form.find(".playlist-id").val();
     const url = "/playlists/" + username + "/" + playlistId;
 
     const formElement = form.get(0);
 
-    // submit form
     fetch(url, {
         method: formElement.method,
         body: new FormData(formElement)
@@ -72,11 +72,12 @@ function updatePlaylist(nameLink, form) {
         .then((response) => {
             return response.text();
         }).then((html) => {
-            console.log(html);
             nameLink.replaceWith(html);
         }).catch((err) => {
             console.warn("Something went wrong", err);
         })
+
+    e.preventDefault();
 
 }
 
@@ -88,7 +89,6 @@ function deletePlaylist(e) {
     const playlistId = form.children(".playlist-id").val();
     const url = "/playlists/" + username + "/" + playlistId;
 
-    // submit form
     fetch(url, {
         method: "delete",
     })

@@ -1,5 +1,5 @@
 <div id="playlist-container" class="d-flex flex-column align-items-center gap-3" th:fragment="playlist-container">
-    <form method="post" action="#" onsubmit="savePlaylist(event)" th:object="${topTracksList}">
+    <form id="save-playlist-form" method="post" action="#" onsubmit="savePlaylist(event)" th:object="${topTracksList}">
 
         <div class="mb-3">
             <label for="username" class="form-label">Username</label>
@@ -28,6 +28,7 @@
                                 <input type="hidden" th:field="*{appTracks[__${stat.index}__].artist}" />
                                 <input type="hidden" th:field="*{appTracks[__${stat.index}__].albumTitle}" />
                                 <input type="hidden" th:field="*{appTracks[__${stat.index}__].albumImgUrl}" />
+                                <input type="hidden" th:field="*{appTracks[__${stat.index}__].duration}" />
                                 <input type="hidden" th:field="*{appTracks[__${stat.index}__].durationStr}" />
                                 <input type="hidden" th:field="*{appTracks[__${stat.index}__].trackUrl}" />
 
