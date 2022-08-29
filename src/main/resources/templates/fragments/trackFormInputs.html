@@ -1,0 +1,9 @@
+<th:block class="track-form-inputs">
+    <input type="hidden" th:field="*{appTracks[__${stat.index}__].title}" />
+    <input type="hidden" th:field="*{appTracks[__${stat.index}__].artist}" />
+    <input type="hidden" th:field="*{appTracks[__${stat.index}__].albumTitle}" />
+    <input type="hidden" th:field="*{appTracks[__${stat.index}__].albumImgUrl}" />
+    <input type="hidden" th:field="*{appTracks[__${stat.index}__].duration}" />
+    <input type="hidden" th:field="*{appTracks[__${stat.index}__].durationStr}" />
+    <input type="hidden" th:field="*{appTracks[__${stat.index}__].trackUrl}" />
+</th:block>

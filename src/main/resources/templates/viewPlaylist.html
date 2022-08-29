@@ -8,29 +8,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../static/styles/index.css" th:href="@{/styles/index.css}" type="text/css">
 
-    <title>Spotify Playlist Maker - Manage Playlists</title>
+    <title>Spotify Playlist Maker - View Playlist</title>
 </head>
 
 <body>
-
-    <header th:replace="fragments/header.html :: header('manage')">
+    <header th:replace="fragments/header.html :: header('view')"></header>
     </header>
 
     <section id="main">
-        <div class="d-flex flex-column align-items-center w75 mx-auto my-5">
-            <h2>My Playlists</h2>
-            <form id="login-form" action="#">
-                <div class="mb-3 d-flex align-items-center gap-3">
-                    <input type="text" class="form-control" id="username-input" placeholder="Enter username..."
-                        required>
-                    <button type="submit" class="get-playlists-btn btn btn-primary text-nowrap"
-                        onclick="showUserPlaylists(event)">View playlists</button>
-                </div>
-            </form>
+        <div class="d-flex flex-column align-items-center w-50 mx-auto my-5">
+            <h2 h2 th:text="${playlist.name}"></h2>
+            <th:block th:each="track, stat : ${playlist.appTracks}"
+                th:insert="fragments/track.html :: track-card(appTracks=${playlist.appTracks}, stat=${stat}, track=${track}, showForm=false)">
+            </th:block>
         </div>
-        <div id="user-playlists"></div>
 
     </section>
 
@@ -38,7 +30,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" th:src="@{/js/playlists.js}"></script>
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
 
 </body>
 

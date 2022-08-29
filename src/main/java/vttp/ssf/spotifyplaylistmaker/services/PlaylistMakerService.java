@@ -83,7 +83,6 @@ public class PlaylistMakerService {
    * @return array of PlaylistTrack objects
    */
   private PlaylistTrack[] getPlaylistTracks(String playlistId) {
-    // TODO: move to repo
     final GetPlaylistsItemsRequest gpiRequest = spotifyApi
       .getPlaylistsItems(playlistId)
       .build();
@@ -152,7 +151,6 @@ public class PlaylistMakerService {
   // * Public methods
   // ******************************
 
-  // SMELL: long method, a lot of type casting and manipulation
   public AppPlaylist getTopTracksOfKeyword(
     int nTracks,
     int nPlaylists,

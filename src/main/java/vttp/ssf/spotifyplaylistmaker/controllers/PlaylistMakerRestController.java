@@ -1,6 +1,5 @@
 package vttp.ssf.spotifyplaylistmaker.controllers;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -63,19 +62,18 @@ public class PlaylistMakerRestController {
     @PathVariable String username,
     @RequestBody AppPlaylist playlist
   ) {
-    playlist.setDateCreated(LocalDate.now().toString());
-    playlist.setnTracks(playlist.getAppTracks().size());
-
-    AppUser user = userService.getUser(username);
-
-    // add playlist to user's playlists
-    userService.addPlaylist(username, playlist);
+    AppPlaylist newPlaylist = new AppPlaylist(playlist.getAppTracks());
+    newPlaylist.setName(playlist.getName());
 
     logger.info(
-      "Saving playlist {} containing: {}",
-      playlist.getName(),
-      playlist.getnTracks()
+      "Saving playlist id: {}, name: {} to {}'s playlist collection",
+      newPlaylist.getId(),
+      newPlaylist.getName(),
+      username
     );
+
+    // add playlist to user's playlists
+    userService.addPlaylist(username, newPlaylist);
 
     return ResponseEntity.ok(playlist);
   }

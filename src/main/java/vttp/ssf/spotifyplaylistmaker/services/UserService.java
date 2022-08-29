@@ -65,7 +65,7 @@ public class UserService {
     );
   }
 
-  // SMELL: duplicate code
+  // SMELL: rename and get methods contain duplicated code
   public AppPlaylist getUserPlaylist(String username, String playlistId) {
     AppUser user = userRepo.getUserByUsername(username);
     AppPlaylist playlist = user

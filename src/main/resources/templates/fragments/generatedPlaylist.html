@@ -1,0 +1,24 @@
+<div id="playlist-container" class="d-flex flex-column align-items-center gap-3" th:fragment="playlist-container">
+    <form id="save-playlist-form" method="post" action="#" onsubmit="savePlaylist(event)" th:object="${topTracksList}">
+
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username-input" placeholder="Enter username..." required>
+        </div>
+        <div class="mb-3">
+            <label for="playlist-name" class="form-label">Playlist Name</label>
+            <input type="text" class="form-control" id="playlist-name" th:field="*{name}"
+                placeholder="Enter a name for this playlist..." required>
+        </div>
+        <div id="save-playlist-container" class="d-grid gap-2 my-3">
+            <button id="save-playlist-btn" class="btn btn-primary" type="submit">Save this
+                playlist</button>
+        </div>
+
+        <div>
+            <th:block th:each="track, stat : *{appTracks}"
+                th:insert="fragments/track.html :: track-card(appTracks=${appTracks}, stat=${stat}, track=${track}, showForm=true)">
+            </th:block>
+        </div>
+    </form>
+</div>

@@ -20,9 +20,8 @@ public class AppPlaylist implements Serializable {
     this.id = generateId();
   }
 
-  //SMELL: methods in constructor, does not apply when default constructor used
   public AppPlaylist(List<AppTrack> appTracks) {
-    this.id = generateId();
+    this();
     this.appTracks = appTracks;
     this.nTracks = appTracks.size();
     this.dateCreated = LocalDate.now().toString();
@@ -103,4 +102,5 @@ public class AppPlaylist implements Serializable {
   public void setAppTracks(List<AppTrack> appTracks) {
     this.appTracks = appTracks;
   }
+  // TODO: allow reordering of tracks
 }

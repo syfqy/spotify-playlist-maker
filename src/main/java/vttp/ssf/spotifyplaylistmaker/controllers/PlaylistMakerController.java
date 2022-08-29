@@ -61,7 +61,7 @@ public class PlaylistMakerController {
 
     model.addAttribute("topTracksList", topTracksList);
 
-    return "frag/generatedPlaylist";
+    return "fragments/generatedPlaylist";
   }
 
   @PostMapping("/playlists/{username}")
@@ -83,7 +83,7 @@ public class PlaylistMakerController {
     // add playlist to user's playlists
     userService.addPlaylist(username, newPlaylist);
 
-    return "frag/savedPlaylist";
+    return "fragments/savedPlaylist";
   }
 
   // TODO: move to separate controller
@@ -98,7 +98,7 @@ public class PlaylistMakerController {
     // fetch from redis
     AppUser user = userService.getUser(username);
     model.addAttribute("user", user);
-    return "frag/userPlaylists";
+    return "fragments/userPlaylists";
   }
 
   @PostMapping(
@@ -128,7 +128,7 @@ public class PlaylistMakerController {
     model.addAttribute("user", user);
     model.addAttribute("playlist", playlist);
 
-    return "frag/userPlaylists :: playlist-link";
+    return "fragments/userPlaylists :: playlist-link";
   }
 
   @DeleteMapping("/playlists/{username}/{playlistId}")
@@ -143,7 +143,7 @@ public class PlaylistMakerController {
     AppUser user = userService.getUser(username);
     model.addAttribute("user", user);
 
-    return "frag/userPlaylists";
+    return "fragments/userPlaylists";
   }
 
   @GetMapping("/playlists/{username}/{playlistId}")
@@ -154,6 +154,6 @@ public class PlaylistMakerController {
   ) {
     AppPlaylist playlist = userService.getUserPlaylist(username, playlistId);
     model.addAttribute("playlist", playlist);
-    return "playlist";
+    return "viewPlaylist";
   }
 }
