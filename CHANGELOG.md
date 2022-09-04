@@ -1,3 +1,20 @@
+# [0.5.0](https://github.com/syfqy/spotify-playlist-maker/compare/v0.4.0...v0.5.0) (2022-09-04)
+
+
+### Bug Fixes
+
+* add form validation on get user's playlists ([0c26b9a](https://github.com/syfqy/spotify-playlist-maker/commit/0c26b9adec32ff1d7065bf8ca6e5b20a8b75c12d))
+* enable all forms to be submitted using enter key ([15106a7](https://github.com/syfqy/spotify-playlist-maker/commit/15106a780022f5d4a3d0aa4e4fa4d1c5f6428de3))
+* resolve scheduler on request new token not working ([f5fd142](https://github.com/syfqy/spotify-playlist-maker/commit/f5fd1424965afaa6aa840f62013cecd5a186c2ee))
+
+
+### Features
+
+* add endpoints to rest controller ([fdbbd5c](https://github.com/syfqy/spotify-playlist-maker/commit/fdbbd5c76dae968c93849fe41b8bbb3ac234d21e))
+* add scheduler to refresh access token after expiry every 60 min ([384ea8b](https://github.com/syfqy/spotify-playlist-maker/commit/384ea8b80249e9bf2fefe22797108fb766c0013e))
+
+
+
 # [0.4.0](https://github.com/syfqy/spotify-playlist-maker/compare/v0.3.0...v0.4.0) (2022-08-25)
 
 
