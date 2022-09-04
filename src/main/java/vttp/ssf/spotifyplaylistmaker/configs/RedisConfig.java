@@ -50,11 +50,7 @@ public class RedisConfig {
       jedisClient
     );
     jedisFac.afterPropertiesSet();
-    logger.info(
-      "redis host port > {redisHost} {redisPort}",
-      redisHost,
-      redisPort
-    );
+    logger.info("redis host port > {} {}", redisHost, redisPort);
     RedisTemplate<String, AppUser> template = new RedisTemplate<String, AppUser>();
     template.setConnectionFactory(jedisFac);
     template.setKeySerializer(new StringRedisSerializer());
