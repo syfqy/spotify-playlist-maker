@@ -43,6 +43,16 @@
                         <p class="track-duration" th:text="${track.durationStr}"></p>
                     </div>
                 </div>
+                <div class="row g-0">
+                    <div class="col-4">
+                        <strong>
+                            <p>No. of playlists found:</p>
+                        </strong>
+                    </div>
+                    <div class="col-8 text-nowrap">
+                        <p class="track-frequency" th:text="${track.freq}"></p>
+                    </div>
+                </div>
                 <div class="row">
                     <a class="track-url" th:href="${track.trackUrl}" th:text="|Play ${track.title} on Spotify|"></a>
                 </div>

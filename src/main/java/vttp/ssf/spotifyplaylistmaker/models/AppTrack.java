@@ -13,6 +13,7 @@ public class AppTrack implements Serializable {
   int duration;
   String durationStr;
   String trackUrl;
+  int freq;
 
   //TODO: add rank and no of times appear in public playlists
 
@@ -70,6 +71,14 @@ public class AppTrack implements Serializable {
 
   public void setTrackUrl(String trackUrl) {
     this.trackUrl = trackUrl;
+  }
+
+  public int getFreq() {
+    return freq;
+  }
+
+  public void setFreq(int freq) {
+    this.freq = freq;
   }
 
   public static AppTrack createFromTrack(Track track) {
