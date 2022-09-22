@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.apache.hc.core5.http.ParseException;
 import org.slf4j.Logger;
@@ -121,7 +122,7 @@ public class PlaylistMakerService {
   private Map<String, Long> rankTracksByFrequency(List<String> trackList) {
     Map<String, Long> trackFreqMap = trackList
       .stream()
-      .collect(groupingBy(t -> t, counting()));
+      .collect(groupingBy(Function.identity(), counting()));
 
     return trackFreqMap;
   }
@@ -185,7 +186,13 @@ public class PlaylistMakerService {
       .orElse(null);
 
     // get list of trackNames-artists
-    List<String> trackNameList = new LinkedList<>(allTracksMap.keySet());
+    List<String> trackNameList = new LinkedList<>();
+    for (Map<String, Track> tnMap : trackNameMapList) {
+      for (String trackName : tnMap.keySet()) {
+        trackNameList.add(trackName);
+        System.out.println(trackName);
+      }
+    }
 
     // rank tracks by freq and get top N tracks
     Map<String, Long> trackFreqMap = rankTracksByFrequency(trackNameList);
@@ -197,6 +204,13 @@ public class PlaylistMakerService {
       .map(t -> allTracksMap.get(t))
       .map(t -> AppTrack.createFromTrack(t))
       .toList();
+
+    appTracks.forEach(
+      t ->
+        t.setFreq(
+          trackFreqMap.get(t.getTitle() + "-" + t.getArtist()).intValue()
+        )
+    );
 
     AppPlaylist topTracksList = new AppPlaylist(appTracks);
 

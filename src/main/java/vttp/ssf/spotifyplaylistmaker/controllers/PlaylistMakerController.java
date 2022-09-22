@@ -43,8 +43,8 @@ public class PlaylistMakerController {
     Model model
   ) {
     // TEST: get nTracks and nPlaylists via user input
-    int nTracks = 10;
-    int nPlaylists = 5;
+    int nTracks = 20;
+    int nPlaylists = 40;
 
     logger.info(
       "Generating playlist of {} tracks via mining {} playlists about: {}",
