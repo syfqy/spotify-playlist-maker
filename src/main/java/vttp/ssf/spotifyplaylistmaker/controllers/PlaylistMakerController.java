@@ -128,7 +128,7 @@ public class PlaylistMakerController {
     model.addAttribute("user", user);
     model.addAttribute("playlist", playlist);
 
-    return "fragments/userPlaylists :: playlist-link";
+    return "fragments/playlist :: playlist-link";
   }
 
   @DeleteMapping("/playlists/{username}/{playlistId}")
