@@ -1,3 +1,12 @@
+## [0.6.1](https://github.com/syfqy/spotify-playlist-maker/compare/v0.6.0...v0.6.1) (2022-09-22)
+
+
+### Bug Fixes
+
+* fix issue where playlist name not appearing after rename ([632688c](https://github.com/syfqy/spotify-playlist-maker/commit/632688c005c812f6e85d719bd52c3c418b1233b3))
+
+
+
 # [0.6.0](https://github.com/syfqy/spotify-playlist-maker/compare/v0.5.0...v0.6.0) (2022-09-22)
 
 
@@ -69,16 +78,6 @@
 * add spinner and fetch to search button ([00dbe4d](https://github.com/syfqy/spotify-playlist-maker/commit/00dbe4d08f8bde9ab255e45c946e89ecfc6b4568))
 * add User class to represent user ([7509cf7](https://github.com/syfqy/spotify-playlist-maker/commit/7509cf77ec1a200b97f4743a171e13937f9bb65e))
 * enable save and retrieval of playlists from db ([fe5897a](https://github.com/syfqy/spotify-playlist-maker/commit/fe5897abb5d1f8e100be7791215157eb95073442))
-
-
-
-# [0.2.0](https://github.com/syfqy/spotify-playlist-maker/compare/v0.1.0...v0.2.0) (2022-08-15)
-
-
-### Features
-
-* add controller to serve views ([85b1234](https://github.com/syfqy/spotify-playlist-maker/commit/85b123404e83a97b7dea3cf655c87f3477b823c4))
-* add redis configs ([589e772](https://github.com/syfqy/spotify-playlist-maker/commit/589e772ec91e3c8c98e738047a371e9a421a097b))
 
 
 
